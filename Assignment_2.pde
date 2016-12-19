@@ -11,6 +11,7 @@ float groundHeight;
 
 //ArrayLists
 ArrayList<GameObject> gameObjects = new ArrayList<GameObject>();
+boolean[] keys = new boolean[1000];//this and check keys are bryans code
 
 void setup()
 {
@@ -30,7 +31,7 @@ void draw()
 {
   
   
-  //background(0);
+  background(0);
   drawGameObjects();
   drawGround();
   
@@ -42,6 +43,7 @@ void drawGameObjects()
     for(int i = 0; i < gameObjects.size(); i++)
     {
        gameObjects.get(i).render(); 
+       gameObjects.get(i).update(); 
     }
 }//end drawGameObjects()
 
@@ -60,3 +62,22 @@ void initPlayer()
     gameObjects.add(p);
   
 }//end initPlayer
+
+void keyPressed()
+{ 
+  keys[keyCode] = true;
+}
+ 
+void keyReleased()
+{
+  keys[keyCode] = false; 
+}
+
+boolean checkKey(int k)
+{
+  if (keys.length >= k) 
+  {
+    return keys[k] || keys[Character.toUpperCase(k)];  
+  }
+  return false;
+}
