@@ -5,6 +5,10 @@
 
 */
 
+//Gravity and other useful constants
+final float GRAVITY = 5;
+float timeDelta = 1.0f / 60.0f;
+
 //ground variables
 float groundX, groundY;
 float groundHeight;

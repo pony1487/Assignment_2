@@ -1,6 +1,10 @@
 abstract class GameObject
 {
    PVector pos;
+   PVector velocity;
+   PVector force;
+   PVector accel;
+   PVector gravity;
    
   GameObject()
   {
