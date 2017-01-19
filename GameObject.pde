@@ -5,6 +5,8 @@ abstract class GameObject
    PVector force;
    PVector accel;
    PVector gravity;
+   PVector forward;
+   
    
   GameObject()
   {

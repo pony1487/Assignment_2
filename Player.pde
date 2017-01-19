@@ -5,7 +5,8 @@ class Player extends GameObject
   float power = 100;
   float jumpTime = 1.0;//mot used here, might be useful in future
   boolean isJumping;
-  float MAX_JUMP = height / 2;
+  float theta;
+  
  
   
   
@@ -17,7 +18,9 @@ class Player extends GameObject
     force = new PVector(0,0);
     accel = new PVector(0,0);
     gravity = new PVector(0,GRAVITY);
+    forward = new PVector(0,-1);
     isJumping = false;
+    theta = 0;
   
   }
   
@@ -45,6 +48,8 @@ class Player extends GameObject
   
   void update()
   {
+    forward.x = sin(theta);
+    forward.y  = -cos(theta);
     
     if(checkKey(UP))
     {
@@ -52,7 +57,7 @@ class Player extends GameObject
       
       pos.y = pos.y - 5;
       
-      println("Pos.y = " + pos.y);
+      //println("Pos.y = " + pos.y);
       //println("Vel.y = " +  velocity.y);
       
     }
@@ -61,11 +66,13 @@ class Player extends GameObject
     if(checkKey(LEFT))
     {
        velocity.x = velocity.x - 5;
+       theta -= 0.1f;
     }
     
     if(checkKey(RIGHT))
     {
        velocity.x = velocity.x + 5;
+       theta += 0.1f;
     
     }
     
@@ -87,7 +94,7 @@ class Player extends GameObject
     //check if player has hit the floor, reset their position on the ground
     if(pos.y > groundY - 25)
     {
-        println("HIT FLOOR");
+        //println("HIT FLOOR");
         pos.y = groundY - 25;
         isJumping = false;
     }
@@ -109,7 +116,14 @@ class Player extends GameObject
        pos.x = width;
     }
     
-  
+    //check for fire
+     if(checkKey(' '))
+     {
+       //println("FIRE!");
+       PVector bp = PVector.add(pos, PVector.mult(forward, 40));
+       Bullet b = new Bullet(bp.x, bp.y, theta, 20, 5);
+       gameObjects.add(b);
+     }
   
     
     
@@ -123,9 +137,10 @@ class Player extends GameObject
   
   void applyGravity()
   {
+    //couldnt get this working
     //velocity.add(gravity);
     pos.y = pos.y + 2;
-    println("Pos.y = " + pos.y);
+
     jumpTime = 1;
   }
   
