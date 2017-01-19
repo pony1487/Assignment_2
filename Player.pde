@@ -5,7 +5,7 @@ class Player extends GameObject
   float power = 100;
   float jumpTime = 1.0;//mot used here, might be useful in future
   boolean isJumping;
-  int MAX_JUMP = height / 2;
+  float MAX_JUMP = height / 2;
  
   
   
@@ -91,10 +91,22 @@ class Player extends GameObject
         pos.y = groundY - 25;
         isJumping = false;
     }
-    else if(pos.y <= MAX_JUMP)
+    
+    //hit roof
+    if(pos.y < 0 )
     {
-       isJumping = true;
-       
+       pos.y = 0;
+    }
+    //hit left wall
+    if(pos.x < 0 )
+    {
+       pos.x = 0;
+    }
+    //hit right wall
+    
+    if(pos.x > width )
+    {
+       pos.x = width;
     }
     
   
