@@ -3,8 +3,9 @@ class Player extends GameObject
   int size;
   float mass = 1;
   float power = 100;
-  float jumpTime = 1.0;
+  float jumpTime = 1.0;//mot used here, might be useful in future
   boolean isJumping;
+  int MAX_JUMP = height / 2;
  
   
   
@@ -45,19 +46,6 @@ class Player extends GameObject
   void update()
   {
     
-    /*
-    if(checkKey(UP))
-    {
-      while(jumpTime > 0)
-      {
-        pos.y = pos.y - 5;
-        jumpTime = jumpTime - 0.1;
-      }
-
-    }
-    */
-   // println("Pos.y = " + pos.y);
-   // println("GroundY = " + groundY); 
     if(checkKey(UP))
     {
       isJumping = true;
@@ -90,17 +78,25 @@ class Player extends GameObject
     //slowdown
     velocity.mult(0.99f);
     
+    
     if(isJumping)
     {
       applyGravity();
     }
     
-      if(pos.y > groundY - 25)
-      {
-          println("HIT FLOOR");
-          pos.y = groundY - 25;
-          isJumping = false;
-      }
+    //check if player has hit the floor, reset their position on the ground
+    if(pos.y > groundY - 25)
+    {
+        println("HIT FLOOR");
+        pos.y = groundY - 25;
+        isJumping = false;
+    }
+    else if(pos.y <= MAX_JUMP)
+    {
+       isJumping = true;
+       
+    }
+    
   
   
     
