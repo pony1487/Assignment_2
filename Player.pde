@@ -6,6 +6,8 @@ class Player extends GameObject
   float jumpTime = 1.0;//mot used here, might be useful in future
   boolean isJumping;
   float theta;
+  PShape shape;
+  PImage sprite;
   
  
   
@@ -21,6 +23,8 @@ class Player extends GameObject
     forward = new PVector(0,-1);
     isJumping = false;
     theta = 0;
+    create();
+    sprite = loadImage("player.png");
   
   }
   
@@ -45,6 +49,20 @@ class Player extends GameObject
   }
   
   */
+  
+  void create()
+  {
+    shape = createShape();
+    shape.beginShape();
+    shape.stroke(255);
+    shape.noFill();
+    shape.strokeWeight(2);
+    shape.vertex(-(size/2), size/2);
+    shape.vertex(0, - (size/2));
+    shape.vertex((size/2), (size/2));
+    shape.vertex(0, 0);
+    shape.endShape(CLOSE);
+  }
   
   void update()
   {
@@ -121,18 +139,23 @@ class Player extends GameObject
      {
        //println("FIRE!");
        PVector bp = PVector.add(pos, PVector.mult(forward, 40));
-       Bullet b = new Bullet(bp.x, bp.y, theta, 20, 5);
+       Bullet b = new Bullet(bp.x, bp.y, theta, 20);
        gameObjects.add(b);
      }
   
-    
-    
   }
   
   void render()
   {
-      fill(255,0,0);
-      ellipse(pos.x, pos.y,size, size);
+
+    pushMatrix(); // Stores the current transform
+    translate(pos.x, pos.y);
+   
+    //rotate(theta);    
+    // Use a PShape();
+    shape(shape, 0, 0);
+    //image(sprite,width/2, height/2);
+    popMatrix(); // Restore the transform
   }
   
   void applyGravity()

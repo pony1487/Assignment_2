@@ -17,6 +17,10 @@ float groundHeight;
 ArrayList<GameObject> gameObjects = new ArrayList<GameObject>();
 boolean[] keys = new boolean[1000];//this and check keys are bryans code
 
+//background and floor images
+PImage backgroundImage;
+PImage groundImage;
+
 void setup()
 {
     size(800,600);
@@ -25,6 +29,14 @@ void setup()
     groundHeight = 50;
     groundX = 0;
     groundY = height - groundHeight;
+    
+    //set up background and floor
+    backgroundImage = loadImage("skybackground.jpg");
+    backgroundImage.resize(width, height);
+    
+    groundImage = loadImage("ground.png");
+    groundImage.resize(width,100);
+    
     
     //init stuff
     initPlayer();
@@ -35,7 +47,8 @@ void draw()
 {
   
   
-  background(0);
+  //background(0);
+  image(backgroundImage, 0,0);
   drawGameObjects();
   drawGround();
   
@@ -55,7 +68,8 @@ void drawGround()
 {
     fill(0,225,0);
     noStroke();
-    rect(groundX, groundY, width, groundHeight);
+    //rect(groundX, groundY, width, groundHeight);
+    image(groundImage, groundX, groundY - 50);
   
 }//end drawGround
 

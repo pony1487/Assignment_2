@@ -3,16 +3,14 @@ class Bullet extends GameObject
   float theta;
   float size;
   float speed = 200;
-  float timeToLive;
-  float alive;
   
-  Bullet(float x, float y, float theta, float size, float timeToLive)
+  Bullet(float x, float y, float theta, float size)
   {
     pos = new PVector(x, y);
     forward = new PVector(0, 1);
     this.theta = theta;
     this.size = size;
-    this.timeToLive = timeToLive;
+    
   }
   
   void update()
@@ -24,9 +22,28 @@ class Bullet extends GameObject
    
     println("Bullet x = " + pos.x);
     println("Bullet y = " + pos.y);
-  }
+    
+    
+    //remove the bullets if they go offscreen
+  if (pos.x > width)
+    {
+       gameObjects.remove(this);
+    }
+    if (pos.x < 0)
+    {
+       gameObjects.remove(this);
+    }
+    if (pos.y > height)
+    {
+       gameObjects.remove(this);
+    }
+    if (pos.y < 0)
+    {
+       gameObjects.remove(this);
+    }
   
-  
+}
+
   void render()
   {
     pushMatrix();
