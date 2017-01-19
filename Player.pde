@@ -4,6 +4,7 @@ class Player extends GameObject
   float mass = 1;
   float power = 100;
   float jumpTime = 1.0;
+  boolean isJumping;
  
   
   
@@ -15,6 +16,7 @@ class Player extends GameObject
     force = new PVector(0,0);
     accel = new PVector(0,0);
     gravity = new PVector(0,GRAVITY);
+    isJumping = false;
   
   }
   
@@ -43,7 +45,7 @@ class Player extends GameObject
   void update()
   {
     
-    
+    /*
     if(checkKey(UP))
     {
       while(jumpTime > 0)
@@ -53,27 +55,53 @@ class Player extends GameObject
       }
 
     }
-
+    */
+   // println("Pos.y = " + pos.y);
+   // println("GroundY = " + groundY); 
+    if(checkKey(UP))
+    {
+      isJumping = true;
+      
+      pos.y = pos.y - 5;
+      
+      println("Pos.y = " + pos.y);
+      //println("Vel.y = " +  velocity.y);
+      
+    }
  
    
     if(checkKey(LEFT))
     {
-       velocity.x = velocity.x - 0.1;
+       velocity.x = velocity.x - 5;
     }
     
     if(checkKey(RIGHT))
     {
-       velocity.x = velocity.x + 0.1;
+       velocity.x = velocity.x + 5;
     
     }
     
+   
     accel = PVector.div(force, mass);// A = F / m
     velocity.add(PVector.mult(accel, timeDelta));// V = V + A * t
     pos.add(PVector.mult(velocity, timeDelta)); // Pos = Pos + A * t
+   
     
     //slowdown
     velocity.mult(0.99f);
-    applyGravity();
+    
+    if(isJumping)
+    {
+      applyGravity();
+    }
+    
+      if(pos.y > groundY - 25)
+      {
+          println("HIT FLOOR");
+          pos.y = groundY - 25;
+          isJumping = false;
+      }
+  
   
     
     
@@ -87,7 +115,9 @@ class Player extends GameObject
   
   void applyGravity()
   {
-    velocity.add(gravity);
+    //velocity.add(gravity);
+    pos.y = pos.y + 2;
+    println("Pos.y = " + pos.y);
     jumpTime = 1;
   }
   
