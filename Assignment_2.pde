@@ -21,6 +21,8 @@ boolean[] keys = new boolean[1000];//this and check keys are bryans code
 PImage backgroundImage;
 PImage groundImage;
 
+Terrain t;
+
 void setup()
 {
     size(800,600);
@@ -37,6 +39,10 @@ void setup()
     groundImage = loadImage("ground.png");
     groundImage.resize(width,100);
     
+    t = new Terrain();
+    gameObjects.add(t);
+    
+    
     
     //init stuff
     initPlayer();
@@ -51,6 +57,8 @@ void draw()
   image(backgroundImage, 0,0);
   drawGameObjects();
   drawGround();
+  
+ 
   
   
 }//end draw
@@ -80,6 +88,12 @@ void initPlayer()
     gameObjects.add(p);
   
 }//end initPlayer
+
+void generateTerrain()
+{
+  
+  
+}
 
 void keyPressed()
 { 

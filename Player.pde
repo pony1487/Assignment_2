@@ -142,6 +142,8 @@ class Player extends GameObject
        Bullet b = new Bullet(bp.x, bp.y, theta, 20);
        gameObjects.add(b);
      }
+     
+   
   
   }
   
@@ -165,6 +167,11 @@ class Player extends GameObject
     pos.y = pos.y + 2;
 
     jumpTime = 1;
+  }
+  
+  float getPlayerX()
+  {
+     return pos.x; 
   }
   
 
