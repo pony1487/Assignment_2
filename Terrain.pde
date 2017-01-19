@@ -11,7 +11,7 @@ class Terrain extends GameObject
     h = 50;
     this.x = width - 50;
     this.y = groundY - h;
-    scrollSpeed = 2;
+    scrollSpeed = 1;
   }
   
   void update()

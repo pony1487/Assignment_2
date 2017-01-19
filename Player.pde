@@ -8,6 +8,7 @@ class Player extends GameObject
   float theta;
   PShape shape;
   PImage sprite;
+  int health;
   
  
   
@@ -24,7 +25,8 @@ class Player extends GameObject
     isJumping = false;
     theta = 0;
     create();
-    sprite = loadImage("player.png");
+    sprite = loadImage("player.png");//not working yet
+    health = 100;
   
   }
   
@@ -50,6 +52,7 @@ class Player extends GameObject
   
   */
   
+  //bryans shape: temporary
   void create()
   {
     shape = createShape();
@@ -143,6 +146,29 @@ class Player extends GameObject
        gameObjects.add(b);
      }
      
+     //check if player hits terrain
+     for(int i = 0; i < gameObjects.size();i++)
+     {
+       GameObject go = gameObjects.get(i);
+       
+       if(go instanceof Terrain)
+       {
+           
+           Terrain temp = (Terrain)go;
+           
+           //println("T.x = " + temp.x);
+           //println("T.y = " + temp.y);
+          //println("PlayerX:" +  pos.x);
+           
+           
+           if( ((pos.x + size/2) >= temp.x  && (pos.x - size/2) <= temp.x) && (pos.y + size) >= temp.y)
+           {
+               health--;
+               println("health:" + health);
+           }
+          
+       }
+     }
    
   
   }
@@ -152,6 +178,7 @@ class Player extends GameObject
 
     pushMatrix(); // Stores the current transform
     translate(pos.x, pos.y);
+    text("Health" + health,30,-0);
    
     //rotate(theta);    
     // Use a PShape();
