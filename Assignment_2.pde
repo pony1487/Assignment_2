@@ -52,23 +52,35 @@ void setup()
     
     //init stuff
     initPlayer();
+    //start at menu
+    mode = 0;
     
 }//end setup
 
 void draw()
 {
   
-  
-  //background(0);
-  image(backgroundImage, 0,0);
-  drawGameObjects();
-  drawGround();
-  
-  
-  //check for game over
-  if(mode == 4)
+  switch(mode)
   {
-     println("GAME OVER"); 
+    case 0:
+         background(0);
+         text("MENU", width/2, height/2);
+         break;
+    case 1:
+        //background(0);
+        image(backgroundImage, 0,0);
+        drawGameObjects();
+        drawGround();
+        break;
+    case 2:
+        background(0);
+        text("ReadME", width/2, height/2);
+        break;
+    case 3:
+        exit(); 
+        break;
+  
+
   }
   
  
@@ -111,6 +123,11 @@ void generateTerrain()
 void keyPressed()
 { 
   keys[keyCode] = true;
+  if (key >= '0' && key <='9')
+  {
+    mode = key - '0';
+  }
+  println(mode);
 }
  
 void keyReleased()
