@@ -3,13 +3,17 @@ class Bullet extends GameObject
   float theta;
   float size;
   float speed = 200;
+  float alive;
+  float timeToLive;
   
-  Bullet(float x, float y, float theta, float size)
+  Bullet(float x, float y, float theta, float size,float timeToLive)
   {
     pos = new PVector(x, y);
     forward = new PVector(0, 1);
     this.theta = theta;
     this.size = size;
+    this.timeToLive = timeToLive;
+    this.alive = 0;
     
   }
   
@@ -20,8 +24,8 @@ class Bullet extends GameObject
     
     pos.add(PVector.mult(PVector.mult(forward, speed), timeDelta));
    
-    println("Bullet x = " + pos.x);
-    println("Bullet y = " + pos.y);
+    //println("Bullet x = " + pos.x);
+    //println("Bullet y = " + pos.y);
     
     
     //remove the bullets if they go offscreen
@@ -40,6 +44,14 @@ class Bullet extends GameObject
     if (pos.y < 0)
     {
        gameObjects.remove(this);
+    }
+    
+    //keep track of who long bullet lasts for
+    alive += timeDelta;
+    
+    if(alive > timeToLive)
+    {
+       gameObjects.remove(this); 
     }
   
 }

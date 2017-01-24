@@ -17,10 +17,16 @@ float groundHeight;
 ArrayList<GameObject> gameObjects = new ArrayList<GameObject>();
 boolean[] keys = new boolean[1000];//this and check keys are bryans code
 
+//mode for each screen;
+//1 = Game, 2 = Readme, 3 = Exit, 4 = Game Over
+int mode;
+
 //background and floor images
 PImage backgroundImage;
 PImage groundImage;
 
+
+//"Pipes"
 Terrain t;
 
 void setup()
@@ -57,6 +63,13 @@ void draw()
   image(backgroundImage, 0,0);
   drawGameObjects();
   drawGround();
+  
+  
+  //check for game over
+  if(mode == 4)
+  {
+     println("GAME OVER"); 
+  }
   
  
   

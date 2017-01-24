@@ -10,6 +10,12 @@ class Player extends GameObject
   PImage sprite;
   int health;
   
+  float fireRate = 2;
+  float fireRatePerSec = 1.0 / fireRate;
+  float timePassed;
+  
+  
+  
  
   
   
@@ -77,6 +83,7 @@ class Player extends GameObject
       isJumping = true;
       
       pos.y = pos.y - 5;
+      //theta = -1; //Not working
       
       //println("Pos.y = " + pos.y);
       //println("Vel.y = " +  velocity.y);
@@ -87,15 +94,19 @@ class Player extends GameObject
     if(checkKey(LEFT))
     {
        velocity.x = velocity.x - 5;
-       theta -= 0.1f;
+       //theta = -1.5; //works when theta is not set to -1 when up is pressed
     }
+ 
     
     if(checkKey(RIGHT))
     {
        velocity.x = velocity.x + 5;
-       theta += 0.1f;
+     
+      // theta = 1.5; //works when theta is not set to -1 when up is pressed
+       
     
     }
+ 
     
    
     accel = PVector.div(force, mass);// A = F / m
@@ -141,9 +152,15 @@ class Player extends GameObject
      if(checkKey(' '))
      {
        //println("FIRE!");
+       
+       if(timePassed > fireRatePerSec)
+       {
        PVector bp = PVector.add(pos, PVector.mult(forward, 40));
-       Bullet b = new Bullet(bp.x, bp.y, theta, 20);
+       Bullet b = new Bullet(bp.x, bp.y, theta, 20,2);
+       //Bullet b = new Bullet(pos.x, pos.y, 0,20);
        gameObjects.add(b);
+       timePassed = 0;
+       }
      }
      
      //check if player hits terrain
@@ -164,14 +181,24 @@ class Player extends GameObject
            if( ((pos.x + size/2) >= temp.x  && (pos.x - size/2) <= temp.x) && (pos.y + size) >= temp.y)
            {
                health--;
-               println("health:" + health);
+               //println("health:" + health);
            }
           
        }
+     }//
+     
+     //increment time passed
+     timePassed += timeDelta;
+     println(timePassed);
+     
+     //check for Death/GameOver
+     if(health <= 0)
+     {
+        mode = 4; 
      }
    
   
-  }
+  }//end update()
   
   void render()
   {
