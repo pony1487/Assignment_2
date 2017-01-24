@@ -52,6 +52,9 @@ void setup()
     
     //init stuff
     initPlayer();
+    
+    //spawn one enemy at start do some sort of timing later
+    spawnEnemy();
     //start at menu
     mode = 0;
     
@@ -78,6 +81,9 @@ void draw()
         break;
     case 3:
         exit(); 
+        break;
+    case 4:
+        text("YOU DIED!!", width/2, height/2);
         break;
   
 
@@ -118,6 +124,12 @@ void generateTerrain()
 {
   
   
+}
+
+void spawnEnemy()
+{
+   Enemy e = new Enemy();
+   gameObjects.add(e);
 }
 
 void keyPressed()

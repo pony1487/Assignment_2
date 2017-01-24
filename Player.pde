@@ -14,10 +14,7 @@ class Player extends GameObject
   float fireRatePerSec = 1.0 / fireRate;
   float timePassed;
   
-  
-  
- 
-  
+  int pointsScored = 0;
   
   Player()
   {
