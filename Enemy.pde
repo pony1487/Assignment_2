@@ -4,14 +4,16 @@ class Enemy extends GameObject
   float size;
   
   
-  Enemy()
+  Enemy(float x, float y)
   {
-    this.pos = new PVector(width/2, 100);
+    this.pos = new PVector(x, y);
     this.size = 20;
   }
   
   void update()
   {
+     //make enemy fall
+     pos.y = pos.y + 1;
   }
   
   void render()

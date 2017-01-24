@@ -186,7 +186,7 @@ class Player extends GameObject
      
      //increment time passed
      timePassed += timeDelta;
-     println(timePassed);
+     //println(timePassed);
      
      //check for Death/GameOver
      if(health <= 0)

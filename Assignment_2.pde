@@ -8,6 +8,9 @@
 //Gravity and other useful constants
 final float GRAVITY = 5;
 float timeDelta = 1.0f / 60.0f;
+float timePassedInMain = 0;
+float enemySpawnRate = 2.0;
+float enemySpawnTime = 1.0 / enemySpawnRate;
 
 //ground variables
 float groundX, groundY;
@@ -54,7 +57,7 @@ void setup()
     initPlayer();
     
     //spawn one enemy at start do some sort of timing later
-    spawnEnemy();
+    //spawnEnemy();
     //start at menu
     mode = 0;
     
@@ -74,6 +77,18 @@ void draw()
         image(backgroundImage, 0,0);
         drawGameObjects();
         drawGround();
+        timePassedInMain += timeDelta;//keep track of time in main
+        
+        //do stuff here to have enemy spawn at intervals
+        println("Game Timer: " + timePassedInMain);
+        if(enemySpawnTime > enemySpawnRate)
+        {
+          spawnEnemy();
+          enemySpawnTime = 0;  
+        }
+        
+        //increment time between enemy spawns
+        enemySpawnTime += timeDelta;
         break;
     case 2:
         background(0);
@@ -128,7 +143,8 @@ void generateTerrain()
 
 void spawnEnemy()
 {
-   Enemy e = new Enemy();
+  //create enemy at radom x coordinate
+   Enemy e = new Enemy(random(0, width), 0);
    gameObjects.add(e);
 }
 
