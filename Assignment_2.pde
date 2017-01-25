@@ -48,8 +48,8 @@ void setup()
     groundImage = loadImage("ground.png");
     groundImage.resize(width,100);
     
-    t = new Terrain();
-    gameObjects.add(t);
+    //t = new Terrain();
+    //gameObjects.add(t);
     
     
     
