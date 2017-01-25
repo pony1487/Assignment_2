@@ -19,20 +19,35 @@ class Enemy extends GameObject
     if (pos.y > height)
     {
        gameObjects.remove(this);
+       
+       //make game too hard
+       /*
+       if(playerScore > 0)
+       {
+         playerScore--;//might note use this gameplay
+       }
+       */
     }
     
     //check if players bullets hit enemies and remove them and add to player score
     for(int i = 0; i < gameObjects.size();i++)
     {
       GameObject go = gameObjects.get(i);
+    
+     
       
       if(go instanceof Bullet)
       {
          Bullet b = (Bullet)go;
          
+         
          if( dist(b.pos.x, b.pos.y, this.pos.x, this.pos.y) < size/2 )
          {
              gameObjects.remove(this);
+             //this is global. Is there a better way to do this so it updates variable of player object instead
+             playerScore++;
+             //how do access the points varaible in player without making it gloabl
+             
          }
         
       }

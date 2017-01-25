@@ -28,6 +28,9 @@ int mode;
 PImage backgroundImage;
 PImage groundImage;
 
+//Other varaibles
+int playerScore;// trying to figure how to ecapsulate this in the player class. Cant get enemy object to let player object know it is hit
+
 
 //"Pipes"
 Terrain t;
@@ -98,6 +101,7 @@ void draw()
         exit(); 
         break;
     case 4:
+        fill(255,0,0);
         text("YOU DIED!!", width/2, height/2);
         break;
   
@@ -130,6 +134,7 @@ void drawGround()
 void initPlayer()
 {
     Player p =  new Player();
+    playerScore = 0;
     
     gameObjects.add(p);
   
@@ -138,7 +143,7 @@ void initPlayer()
 void generateTerrain()
 {
   
-  
+    //not used, maybe use it to clean up code or do something interesting
 }
 
 void spawnEnemy()
@@ -148,6 +153,8 @@ void spawnEnemy()
    gameObjects.add(e);
 }
 
+
+//Code for handling keys
 void keyPressed()
 { 
   keys[keyCode] = true;

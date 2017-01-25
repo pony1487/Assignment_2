@@ -14,7 +14,7 @@ class Player extends GameObject
   float fireRatePerSec = 1.0 / fireRate;
   float timePassed;
   
-  int pointsScored = 0;
+  int pointsScored = 0;//cant figure out how to get the enemy to let player know it has been hit. Used global in main
   
   Player()
   {
@@ -221,7 +221,7 @@ class Player extends GameObject
   
   void render()
   {
-
+    text("Score: " + playerScore, 20,20);
     pushMatrix(); // Stores the current transform
     translate(pos.x, pos.y);
     text("Health" + health,30,-0);
@@ -229,7 +229,7 @@ class Player extends GameObject
     //rotate(theta);    
     // Use a PShape();
     shape(shape, 0, 0);
-    //image(sprite,width/2, height/2);
+    //image(sprite,width/2, height/2); // Not working, fix it
     popMatrix(); // Restore the transform
   }
   
