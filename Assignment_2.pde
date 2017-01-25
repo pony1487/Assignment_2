@@ -146,11 +146,24 @@ void generateTerrain()
     //not used, maybe use it to clean up code or do something interesting
 }
 
+//spwan stuff
 void spawnEnemy()
 {
   //create enemy at radom x coordinate
    Enemy e = new Enemy(random(0, width), 0);
    gameObjects.add(e);
+}
+
+void spawnBerzerkPowerUp()
+{
+    BerzerkPowerUp bezerk = new BerzerkPowerUp();
+    gameObjects.add(bezerk);
+}
+
+void spawnSlowDownPowerUp()
+{
+    SlowDownPowerUp slowDown = new SlowDownPowerUp();
+    gameObjects.add(slowDown);
 }
 
 
