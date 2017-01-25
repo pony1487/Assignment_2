@@ -198,10 +198,13 @@ class Player extends GameObject
                health--;;
                //println("health:" + health);
            }
-          
-         
-       }
+           
+           
+       }//end if Enemy
+     
      }//end for
+     
+     
      
      //increment time passed
      timePassed += timeDelta;
