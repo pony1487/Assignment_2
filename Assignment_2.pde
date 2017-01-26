@@ -9,8 +9,13 @@
 final float GRAVITY = 5;
 float timeDelta = 1.0f / 60.0f;
 float timePassedInMain = 0;
+
+//spawn times
 float enemySpawnRate = 2.0;
 float enemySpawnTime = 1.0 / enemySpawnRate;
+
+float bPowerupSpawnRate = 4.0;
+float bPowerupSpawnTime = 1.0 / bPowerupSpawnRate;
 
 //ground variables
 float groundX, groundY;
@@ -87,12 +92,18 @@ void draw()
         if(enemySpawnTime > enemySpawnRate)
         {
           spawnEnemy();
-          spawnBerzerkPowerUp();
           enemySpawnTime = 0;  
         }
         
-        //increment time between enemy spawns
+        if(bPowerupSpawnTime > bPowerupSpawnRate )
+        {
+          spawnBerzerkPowerUp();
+          bPowerupSpawnTime = 0;
+        }
+        
+        //increment time between spawns
         enemySpawnTime += timeDelta;
+        bPowerupSpawnTime += timeDelta;
         break;
     case 2:
         background(0);
