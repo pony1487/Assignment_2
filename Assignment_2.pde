@@ -87,6 +87,7 @@ void draw()
         if(enemySpawnTime > enemySpawnRate)
         {
           spawnEnemy();
+          spawnBerzerkPowerUp();
           enemySpawnTime = 0;  
         }
         
@@ -156,7 +157,7 @@ void spawnEnemy()
 
 void spawnBerzerkPowerUp()
 {
-    BerzerkPowerUp bezerk = new BerzerkPowerUp();
+    BerzerkPowerUp bezerk = new BerzerkPowerUp(random(0,width),0,4);
     gameObjects.add(bezerk);
 }
 

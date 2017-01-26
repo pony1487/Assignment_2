@@ -56,6 +56,7 @@ class Enemy extends GameObject
   
   void render()
   {
+    fill(0);
     ellipse(pos.x,pos.y, size, size);
   }
   

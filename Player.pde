@@ -195,10 +195,29 @@ class Player extends GameObject
           //(pos.y + size) >= temp_enemy.pos.y && pos.y + size <= temp_enemy.pos.y) 
            if( ((pos.x + size/2) >= temp_enemy.pos.x && (pos.x - size/2) <= temp_enemy.pos.x) && ( (pos.y + size/2) >= temp_enemy.pos.y && (pos.y - size/2) <= temp_enemy.pos.y))
            {
-               health--;;
+               health--;
                //println("health:" + health);
            }
            
+           
+       }//end if Enemy
+     
+     }//end for
+     
+     //check if player hits powerup
+      for(int i = 0; i < gameObjects.size();i++)
+     {
+       GameObject go = gameObjects.get(i);
+       
+       if(go instanceof BerzerkPowerUp)
+       {
+         BerzerkPowerUp temp_berzerk = (BerzerkPowerUp)go;
+         if( ((pos.x + size/2) >= temp_berzerk.pos.x && (pos.x - size/2) <= temp_berzerk.pos.x) && ( (pos.y + size/2) >= temp_berzerk.pos.y && (pos.y - size/2) <= temp_berzerk.pos.y))
+          {
+               temp_berzerk.applyTo(this);
+               //println("health:" + health);
+          }
+          
            
        }//end if Enemy
      
