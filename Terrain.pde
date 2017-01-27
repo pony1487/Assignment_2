@@ -16,7 +16,7 @@ class Terrain extends GameObject
   
   void update()
   {
-      x = x - scrollSpeed;
+      x = x - terrainScrollSpeed;//is global so it can maniuplated
       
       //move it back to the right if it goes off screen and randomise its height
     if (x < (-w))

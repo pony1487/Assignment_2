@@ -1,7 +1,13 @@
 class SlowDownPowerUp extends GameObject implements Powerup
 {
-  SlowDownPowerUp()
+  int size;
+  float timeToLive;
+  float timeAlive;
+  
+  SlowDownPowerUp(float x, float y, int timeToLive)
   {
+    this.pos = new PVector(x,y);
+    this.timeToLive = timeToLive;
   }
   
   

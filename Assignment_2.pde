@@ -10,6 +10,7 @@ final float GRAVITY = 5;
 float timeDelta = 1.0f / 60.0f;
 float timePassedInMain = 0;
 
+
 //spawn times
 float enemySpawnRate = 2.0;
 float enemySpawnTime = 1.0 / enemySpawnRate;
@@ -25,6 +26,9 @@ float groundHeight;
 ArrayList<GameObject> gameObjects = new ArrayList<GameObject>();
 boolean[] keys = new boolean[1000];//this and check keys are bryans code
 
+//hashmap for player scores and name
+HashMap<String,Integer> resultHM = new HashMap<String,Integer>();
+
 //mode for each screen;
 //1 = Game, 2 = Readme, 3 = Exit, 4 = Game Over
 int mode;
@@ -35,6 +39,8 @@ PImage groundImage;
 
 //Other varaibles
 int playerScore;// trying to figure how to ecapsulate this in the player class. Cant get enemy object to let player object know it is hit
+float enemyFallSpeed;//Is global so it can be accessed by slowDown powerup
+float terrainScrollSpeed;
 
 
 //"Pipes"
@@ -59,15 +65,14 @@ void setup()
     t = new Terrain();
     gameObjects.add(t);
     
-    
-    
     //init stuff
     initPlayer();
     
-    //spawn one enemy at start do some sort of timing later
-    //spawnEnemy();
     //start at menu
     mode = 0;
+    //init fall speed for enemy
+    enemyFallSpeed = 1;//original is 1
+    terrainScrollSpeed = 3;//original is 3
     
 }//end setup
 
@@ -78,7 +83,7 @@ void draw()
   {
     case 0:
          background(0);
-         text("MENU", width/2, height/2);
+         text("MENU", width/2, height/2);//to do
          break;
     case 1:
         //background(0);
@@ -107,7 +112,7 @@ void draw()
         break;
     case 2:
         background(0);
-        text("ReadME", width/2, height/2);
+        text("ReadME", width/2, height/2);//to do
         break;
     case 3:
         exit(); 
@@ -152,6 +157,8 @@ void initPlayer()
   
 }//end initPlayer
 
+
+
 void generateTerrain()
 {
   
@@ -174,8 +181,8 @@ void spawnBerzerkPowerUp()
 
 void spawnSlowDownPowerUp()
 {
-    SlowDownPowerUp slowDown = new SlowDownPowerUp();
-    gameObjects.add(slowDown);
+    //SlowDownPowerUp slowDown = new SlowDownPowerUp();
+    //gameObjects.add(slowDown);
 }
 
 

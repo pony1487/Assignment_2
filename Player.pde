@@ -14,6 +14,8 @@ class Player extends GameObject
   float fireRatePerSec = 1.0 / fireRate;
   float timePassed;
   
+  String name;
+  
   int pointsScored = 0;//cant figure out how to get the enemy to let player know it has been hit. Used global in main
   
   Player()
@@ -264,6 +266,11 @@ class Player extends GameObject
   float getPlayerX()
   {
      return pos.x; 
+  }
+  
+  void setPlayerName(String s)
+  {
+    this.name = s;
   }
   
 

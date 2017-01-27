@@ -13,7 +13,7 @@ class Enemy extends GameObject
   void update()
   {
      //make enemy fall
-     pos.y = pos.y + 1;
+     pos.y = pos.y + enemyFallSpeed;
      
      //remove enemy if it falls through floor
     if (pos.y > height)
