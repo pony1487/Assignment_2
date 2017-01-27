@@ -225,6 +225,29 @@ class Player extends GameObject
      
      }//end for
      
+      //check if player hits Slow done powerup
+      for(int i = 0; i < gameObjects.size();i++)
+     {
+       GameObject go = gameObjects.get(i);
+       
+       if(go instanceof SlowDownPowerUp)
+       {
+         SlowDownPowerUp temp_slow = (SlowDownPowerUp)go;
+         if( ((pos.x + size/2) >= temp_slow.pos.x && (pos.x - size/2) <= temp_slow.pos.x) && ( (pos.y + size/2) >= temp_slow.pos.y && (pos.y - size/2) <= temp_slow.pos.y))
+          {
+               temp_slow.slowDown();
+               
+               //do slowDown for X amount of time
+               
+               temp_slow.resetSpeed();
+               //println("health:" + health);
+          }
+          
+           
+       }//end if slowDown
+     
+     }//end for
+     
      
      
      //increment time passed

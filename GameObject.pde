@@ -7,6 +7,8 @@ abstract class GameObject
    PVector gravity;
    PVector forward;
    
+   //float speed;
+   
    
   GameObject()
   {

@@ -18,6 +18,9 @@ float enemySpawnTime = 1.0 / enemySpawnRate;
 float bPowerupSpawnRate = 4.0;
 float bPowerupSpawnTime = 1.0 / bPowerupSpawnRate;
 
+float sPowerUpSpawnRate = 6.0;
+float sPowerUpSpawnTime = 1.0 / sPowerUpSpawnRate;
+
 //ground variables
 float groundX, groundY;
 float groundHeight;
@@ -39,8 +42,10 @@ PImage groundImage;
 
 //Other varaibles
 int playerScore;// trying to figure how to ecapsulate this in the player class. Cant get enemy object to let player object know it is hit
-float enemyFallSpeed;//Is global so it can be accessed by slowDown powerup
-float terrainScrollSpeed;
+
+//used to manipulate speed of enemies and terrain when powerup
+float enemySpeed;
+float terrainSpeed;
 
 
 //"Pipes"
@@ -70,9 +75,11 @@ void setup()
     
     //start at menu
     mode = 0;
-    //init fall speed for enemy
-    enemyFallSpeed = 1;//original is 1
-    terrainScrollSpeed = 3;//original is 3
+    
+    //init speeds
+    enemySpeed = 1; //default is 1
+    terrainSpeed = 3; //default is 3
+ 
     
 }//end setup
 
@@ -97,7 +104,7 @@ void draw()
         if(enemySpawnTime > enemySpawnRate)
         {
           spawnEnemy();
-          enemySpawnTime = 0;  
+          enemySpawnTime = 0;  //reset time
         }
         
         if(bPowerupSpawnTime > bPowerupSpawnRate )
@@ -106,9 +113,16 @@ void draw()
           bPowerupSpawnTime = 0;
         }
         
+        if(sPowerUpSpawnTime > sPowerUpSpawnRate )
+        {
+          spawnSlowDownPowerUp();
+          sPowerUpSpawnTime = 0;
+        }
+        
         //increment time between spawns
         enemySpawnTime += timeDelta;
         bPowerupSpawnTime += timeDelta;
+        sPowerUpSpawnTime += timeDelta;
         break;
     case 2:
         background(0);
@@ -181,8 +195,8 @@ void spawnBerzerkPowerUp()
 
 void spawnSlowDownPowerUp()
 {
-    //SlowDownPowerUp slowDown = new SlowDownPowerUp();
-    //gameObjects.add(slowDown);
+    SlowDownPowerUp slowDown = new SlowDownPowerUp(random(0,width),0,4);
+    gameObjects.add(slowDown);
 }
 
 

@@ -2,18 +2,20 @@ class Enemy extends GameObject
 {
   int health;
   float size;
+  //float speed;
   
   
   Enemy(float x, float y)
   {
     this.pos = new PVector(x, y);
     this.size = 20;
+    //this.speed = 1;
   }
   
   void update()
   {
      //make enemy fall
-     pos.y = pos.y + enemyFallSpeed;
+     pos.y = pos.y + enemySpeed;
      
      //remove enemy if it falls through floor
     if (pos.y > height)
