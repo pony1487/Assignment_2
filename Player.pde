@@ -17,6 +17,7 @@ class Player extends GameObject
   String name;
   
   int pointsScored = 0;//cant figure out how to get the enemy to let player know it has been hit. Used global in main
+  float EffectTimePassed = 0;
   
   Player()
   {
@@ -236,10 +237,7 @@ class Player extends GameObject
          if( ((pos.x + size/2) >= temp_slow.pos.x && (pos.x - size/2) <= temp_slow.pos.x) && ( (pos.y + size/2) >= temp_slow.pos.y && (pos.y - size/2) <= temp_slow.pos.y))
           {
                temp_slow.slowDown();
-               
-               //do slowDown for X amount of time
-               
-               temp_slow.resetSpeed();
+                   
                //println("health:" + health);
           }
           
@@ -253,6 +251,7 @@ class Player extends GameObject
      //increment time passed
      timePassed += timeDelta;
      //println(timePassed);
+     
      
      //check for Death/GameOver
      if(health <= 0)
@@ -275,6 +274,13 @@ class Player extends GameObject
     shape(shape, 0, 0);
     //image(sprite,width/2, height/2); // Not working, fix it
     popMatrix(); // Restore the transform
+  }
+  
+   //reset speed variables
+  void resetSpeed()
+  {
+      enemySpeed = 1; //default is 1
+      terrainSpeed = 3; //default is 3 
   }
   
   void applyGravity()

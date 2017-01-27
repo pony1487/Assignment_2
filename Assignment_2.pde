@@ -46,6 +46,7 @@ int playerScore;// trying to figure how to ecapsulate this in the player class. 
 //used to manipulate speed of enemies and terrain when powerup
 float enemySpeed;
 float terrainSpeed;
+float durationOfEffect;
 
 
 //"Pipes"
@@ -79,6 +80,7 @@ void setup()
     //init speeds
     enemySpeed = 1; //default is 1
     terrainSpeed = 3; //default is 3
+    durationOfEffect = 3.0;
  
     
 }//end setup
@@ -100,7 +102,8 @@ void draw()
         timePassedInMain += timeDelta;//keep track of time in main
         
         //do stuff here to have enemy spawn at intervals
-        println("Game Timer: " + timePassedInMain);
+        //println("Game Timer: " + timePassedInMain);
+        println("Speed: " + enemySpeed);
         if(enemySpawnTime > enemySpawnRate)
         {
           spawnEnemy();
