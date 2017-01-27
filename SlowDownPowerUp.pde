@@ -75,6 +75,22 @@ class SlowDownPowerUp extends GameObject implements Powerup
        effectTime = 0;
     }
     
+    //see if power up hits player then remove it
+    for(int i = 0; i < gameObjects.size();i++)
+    {
+       GameObject go = gameObjects.get(i);
+       
+       if( go instanceof Player)
+       {
+          Player temp = (Player)go;
+          
+          if( ((pos.x + size/2) >= temp.pos.x  && (pos.x - size/2) <= temp.pos.x) && (pos.y + size) >= temp.pos.y)
+          {
+            gameObjects.remove(this);
+          }
+       }
+    }
+    
   }
   
   void render()
