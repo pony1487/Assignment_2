@@ -19,7 +19,7 @@ class Player extends GameObject
   int pointsScored = 0;//cant figure out how to get the enemy to let player know it has been hit. Used global in main
   float EffectTimePassed = 0;
   
-  Player()
+  Player(String name)
   {
     size = 50;
     pos = new PVector(100, groundY - (size / 2));
@@ -33,6 +33,7 @@ class Player extends GameObject
     create();
     sprite = loadImage("player.png");//not working yet
     health = 100;
+    this.name = name;
   
   }
   
@@ -265,9 +266,11 @@ class Player extends GameObject
   void render()
   {
     text("Score: " + playerScore, 20,20);
+    text("Name: " + name, 20,50);
     pushMatrix(); // Stores the current transform
     translate(pos.x, pos.y);
     text("Health" + health,30,-0);
+    displayName();
    
     //rotate(theta);    
     // Use a PShape();
@@ -301,6 +304,18 @@ class Player extends GameObject
   {
     this.name = s;
   }
+  
+  void displayName()
+  {
+     System.out.println("Player: " + name); 
+  }
+  
+  String getPName()
+  {
+     return name; 
+  }
+  
+  
   
 
   

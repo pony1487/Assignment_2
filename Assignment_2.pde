@@ -4,7 +4,9 @@
   Assignment 2
 
 */
-
+//used for text input on screen
+import controlP5.*;
+ControlP5 cp5;
 
 //Gravity and other useful constants
 final float GRAVITY = 5;
@@ -30,8 +32,8 @@ float groundHeight;
 ArrayList<GameObject> gameObjects = new ArrayList<GameObject>();
 boolean[] keys = new boolean[1000];//this and check keys are bryans code
 
-//hashmap for player scores and name
-HashMap<String,Integer> resultHM = new HashMap<String,Integer>();
+//player scores and name
+
 
 //mode for each screen;
 //1 = Game, 2 = Readme, 3 = Exit, 4 = Game Over
@@ -43,6 +45,7 @@ PImage groundImage;
 
 //Other varaibles
 int playerScore;// trying to figure how to ecapsulate this in the player class. Cant get enemy object to let player object know it is hit
+String userName;
 
 //used to manipulate speed of enemies and terrain when powerup
 float enemySpeed;
@@ -75,8 +78,7 @@ void setup()
     t = new Terrain();
     gameObjects.add(t);
     
-    //init stuff
-    initPlayer();
+ 
     
     //start at menu
     mode = 0;
@@ -88,6 +90,16 @@ void setup()
     
     //set up scoreScreen
     scoreScreen = new ScoreScreen();
+    
+    //get user name
+    cp5 = new ControlP5(this);
+
+    cp5.addTextfield("name").setPosition(width/3, height/2 + 50).setSize(100, 50).setAutoClear(false);
+
+    cp5.addBang("submit").setPosition(width/2, height/2 + 50).setSize(100, 50).setLabel("SUBMIT");
+    
+    //init stuff
+    //initPlayer();
     
    
  
@@ -105,6 +117,11 @@ void draw()
          break;
     case 1:
         //background(0);
+        //remove name box
+        cp5.remove("name");
+        cp5.remove("submit");
+       
+        
         image(backgroundImage, 0,0);
         drawGameObjects();
         drawGround();
@@ -112,7 +129,7 @@ void draw()
         
         //do stuff here to have enemy spawn at intervals
         //println("Game Timer: " + timePassedInMain);
-        println("Speed: " + enemySpeed);
+        //println("Speed: " + enemySpeed);
         if(enemySpawnTime > enemySpawnRate)
         {
           spawnEnemy();
@@ -155,12 +172,21 @@ void draw()
   
 }//end draw
 
+void submit()
+{
+    userName=cp5.get(Textfield.class, "name").getText();
+    initPlayer();
+    mode = 1;
+    
+}
+
 void drawGameObjects()
 {
     for(int i = 0; i < gameObjects.size(); i++)
     {
        gameObjects.get(i).render(); 
        gameObjects.get(i).update(); 
+       
     }
 }//end drawGameObjects()
 
@@ -175,7 +201,7 @@ void drawGround()
 
 void initPlayer()
 {
-    Player p =  new Player();
+    Player p =  new Player(userName);
     playerScore = 0;
     
     gameObjects.add(p);
@@ -213,7 +239,7 @@ void spawnSlowDownPowerUp()
 //game over screen
 void drawScoreScreen()
 {
-    
+    scoreScreen.update();
     scoreScreen.render();
 }//end drawGameOver
 
