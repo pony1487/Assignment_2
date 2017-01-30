@@ -5,6 +5,7 @@
 
 */
 
+
 //Gravity and other useful constants
 final float GRAVITY = 5;
 float timeDelta = 1.0f / 60.0f;
@@ -48,6 +49,9 @@ float enemySpeed;
 float terrainSpeed;
 float durationOfEffect;
 
+//scoreScreen for player score and info
+ScoreScreen scoreScreen;
+
 
 //"Pipes"
 Terrain t;
@@ -81,6 +85,11 @@ void setup()
     enemySpeed = 1; //default is 1
     terrainSpeed = 3; //default is 3
     durationOfEffect = 3.0;
+    
+    //set up scoreScreen
+    scoreScreen = new ScoreScreen();
+    
+   
  
     
 }//end setup
@@ -135,8 +144,7 @@ void draw()
         exit(); 
         break;
     case 4:
-        fill(255,0,0);
-        text("YOU DIED!!", width/2, height/2);
+        drawScoreScreen();
         break;
   
 
@@ -201,6 +209,13 @@ void spawnSlowDownPowerUp()
     SlowDownPowerUp slowDown = new SlowDownPowerUp(random(0,width),0,4);
     gameObjects.add(slowDown);
 }
+
+//game over screen
+void drawScoreScreen()
+{
+    
+    scoreScreen.render();
+}//end drawGameOver
 
 
 //Code for handling keys
