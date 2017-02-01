@@ -35,7 +35,7 @@ class ScoreScreen //NOT game object
       }
        
       catch(IOException e) {
-        println("It broke!!!");
+        println("ERROR: Could not write to file!!!");
         e.printStackTrace();
       }
       

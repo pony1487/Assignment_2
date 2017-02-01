@@ -17,6 +17,12 @@ final float GRAVITY = 5;
 float timeDelta = 1.0f / 60.0f;
 float timePassedInMain = 0;
 
+//buttons for menu
+Button b1;
+Button b2;
+Button b3;
+Button b4;
+
 
 //spawn times
 float enemySpawnRate = 2.0;
@@ -96,12 +102,13 @@ void setup()
     //get user name
     cp5 = new ControlP5(this);
 
-    cp5.addTextfield("name").setPosition(width/3, height/2 + 50).setSize(100, 50).setAutoClear(false);
+    cp5.addTextfield("name").setPosition(width/3 + 25, 150).setSize(100, 50).setAutoClear(false);
 
-    cp5.addBang("submit").setPosition(width/2, height/2 + 50).setSize(100, 50).setLabel("SUBMIT");
+    cp5.addBang("submit").setPosition(width/2, 150).setSize(100, 50).setLabel("SUBMIT");
     
-    //init stuff
-    //initPlayer();
+    //init buttons
+    initButtons();
+    
     
    
  
@@ -115,7 +122,8 @@ void draw()
   {
     case 0:
          background(0);
-         text("IGN 10/10", width/2 - 50, height/2);//to do
+         //text("IGN 10/10", width/2 - 50, height/2);//to do
+         drawMenu();
          break;
     case 1:
         //background(0);
@@ -183,8 +191,18 @@ void draw()
 void submit()
 {
     userName=cp5.get(Textfield.class, "name").getText();
+    
+    //error checking is not working here.FIX
+    if(userName == " ")
+    {
+       println("Error: please provide name");
+       mode = 0;
+    }
+    else
+    {
     initPlayer();
     mode = 1;
+    }
     
 }
 
@@ -253,6 +271,40 @@ void drawScoreScreen()
 }//end drawGameOver
 
 
+void initButtons()
+{
+    float buttonWidth = 100;
+    float buttonHeight  = 50;
+    float buttonSpacing = 100;
+    
+    
+  
+    float buttonX = width / 2 - (buttonWidth / 2);
+    float buttonY = height / 4;
+    
+    b1 = new Button(buttonWidth, buttonHeight,buttonX, buttonY, "Play");
+    b2 = new Button(buttonWidth, buttonHeight,buttonX, buttonY + buttonSpacing, "Readme");
+    b3 = new Button(buttonWidth, buttonHeight,buttonX, buttonY + (buttonSpacing * 2), "LeaderBoard");
+    b4 = new Button(buttonWidth, buttonHeight,buttonX, buttonY + (buttonSpacing * 3), "Exit");
+  
+}//end initButtons()
+
+void drawMenu()
+{
+   //b1.render();
+   //b1.drawText();
+   
+   b2.render();
+   b2.drawText();
+   
+   b3.render();
+   b3.drawText();
+   
+   b4.render();
+   b4.drawText();
+  
+}
+
 //Code for handling keys
 void keyPressed()
 { 
@@ -266,7 +318,7 @@ void keyPressed()
   //do if key == 'w', write to file
   if(key == 'w')
   {
-      scoreScreen.writeToFile();
+      scoreScreen.writeToFile();//writes to default processing location, look into changing this!
   }
 }
 void keyReleased()
