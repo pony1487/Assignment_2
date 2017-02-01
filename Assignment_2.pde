@@ -266,17 +266,7 @@ void keyPressed()
   //do if key == 'w', write to file
   if(key == 'w')
   {
-      try {
-        FileWriter output = new FileWriter(file, true);
-        output.write("append\n");
-        output.flush();
-        output.close();
-      }
-       
-      catch(IOException e) {
-        println("It broke!!!");
-        e.printStackTrace();
-      }
+      scoreScreen.writeToFile();
   }
 }
 void keyReleased()

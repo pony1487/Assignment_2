@@ -24,6 +24,20 @@ class ScoreScreen //NOT game object
     
     void writeToFile()
     {
+      try {
+        FileWriter output = new FileWriter(file, true);
+        //output.write("\n");
+        output.write(s + "\t");
+        output.write(new Integer(playerScore).toString() + "\r\n");
+        
+        output.flush();
+        output.close();
+      }
+       
+      catch(IOException e) {
+        println("It broke!!!");
+        e.printStackTrace();
+      }
       
     }
     
@@ -33,7 +47,7 @@ class ScoreScreen //NOT game object
        fill(255,0,0);
        text("YOU DIED!! ", width/2, height/2);
        text(s + "!! You scored: " + playerScore, width/2 - 25, height/2 + 50);
-       text("Press 'w' to write your score to leader board file");
+       text("Press 'w' to write your score to leader board file",width/2 - 25, height/2 + 75);
        
      
 
