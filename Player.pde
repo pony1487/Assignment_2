@@ -37,6 +37,11 @@ class Player extends GameObject
   
   }
   
+  Player()
+  {
+     this.name = "Default"; 
+  }
+  
   /*
   // Newton's 2nd law: F = M * A
   // or A = F / M

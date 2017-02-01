@@ -1,3 +1,7 @@
+/*
+  NOT USED
+*/
+
 class Score//NOT game object
 {
     int score;
@@ -16,10 +20,16 @@ class Score//NOT game object
     
     }
     
+    /*
     void render()
     {
-       text("Name: " + name,  100,100);
+       for(int i = 0; i < scores.size();i++)
+       {
+           System.out.println("Name: " + name); 
+           System.out.println("Score: " + score); 
+       }
     }
+    */
  
     
     

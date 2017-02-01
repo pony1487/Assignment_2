@@ -8,6 +8,10 @@
 import controlP5.*;
 ControlP5 cp5;
 
+//used to store players score and name
+import java.io.FileWriter;
+File file;
+
 //Gravity and other useful constants
 final float GRAVITY = 5;
 float timeDelta = 1.0f / 60.0f;
@@ -31,8 +35,6 @@ float groundHeight;
 //ArrayLists
 ArrayList<GameObject> gameObjects = new ArrayList<GameObject>();
 boolean[] keys = new boolean[1000];//this and check keys are bryans code
-
-//player scores and name
 
 
 //mode for each screen;
@@ -78,8 +80,8 @@ void setup()
     t = new Terrain();
     gameObjects.add(t);
     
- 
-    
+    //for writing player scores to file
+    file = new File("scores.tsv");
     //start at menu
     mode = 0;
     
@@ -113,7 +115,7 @@ void draw()
   {
     case 0:
          background(0);
-         text("MENU", width/2, height/2);//to do
+         text("IGN 10/10", width/2 - 50, height/2);//to do
          break;
     case 1:
         //background(0);
@@ -158,10 +160,15 @@ void draw()
         text("ReadME", width/2, height/2);//to do
         break;
     case 3:
+        
         exit(); 
         break;
     case 4:
         drawScoreScreen();
+        //scoreScreen.writeToFile();
+        
+        
+        
         break;
   
 
@@ -171,6 +178,7 @@ void draw()
   
   
 }//end draw
+ 
 
 void submit()
 {
@@ -241,6 +249,7 @@ void drawScoreScreen()
 {
     scoreScreen.update();
     scoreScreen.render();
+    
 }//end drawGameOver
 
 
@@ -253,8 +262,23 @@ void keyPressed()
     mode = key - '0';
   }
   println(mode);
+  
+  //do if key == 'w', write to file
+  if(key == 'w')
+  {
+      try {
+        FileWriter output = new FileWriter(file, true);
+        output.write("append\n");
+        output.flush();
+        output.close();
+      }
+       
+      catch(IOException e) {
+        println("It broke!!!");
+        e.printStackTrace();
+      }
+  }
 }
- 
 void keyReleased()
 {
   keys[keyCode] = false; 
