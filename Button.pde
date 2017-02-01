@@ -32,10 +32,39 @@ class Button
          text(text, x + w/2, y + h / 2);
      }
      
+   
+     
      void isClicked()
      {
+      
+      if( (mouseX > x) && (mouseX < x  + w) && (mouseY > y) && (mouseY < y + h) )
+      {
+          mouseOverButton = true;
+          
+          if(mousePressed)
+          {
+            if(text == "Readme")
+            {
+                mode = 2;
+            }
+            
+            if(text == "LeaderBoard")
+            {
+                mode = 5;
+            }
+            
+            if(text == "Exit")
+            {
+                mode = 3;
+            }
+          }//end if
+         
+          
+      }
+      else
+      {
+         mouseOverButton = false; 
+      }
+  
      }
-  
-  
-  
 }

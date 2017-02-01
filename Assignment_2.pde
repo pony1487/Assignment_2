@@ -44,7 +44,7 @@ boolean[] keys = new boolean[1000];//this and check keys are bryans code
 
 
 //mode for each screen;
-//1 = Game, 2 = Readme, 3 = Exit, 4 = Game Over
+//1 = Game, 2 = Readme, 3 = Exit, 4 = Game Over, 5 = leaderboard
 int mode;
 
 //background and floor images
@@ -174,10 +174,16 @@ void draw()
     case 4:
         drawScoreScreen();
         //scoreScreen.writeToFile();
-        
-        
-        
         break;
+        
+    case 5:
+      background(0);
+      text("Leaderboard", width/2, height/2);
+      break;
+        
+        
+        
+        
   
 
   }
@@ -296,13 +302,16 @@ void drawMenu()
    
    b2.render();
    b2.drawText();
+   b2.isClicked();
+   
    
    b3.render();
    b3.drawText();
+   b3.isClicked();
    
    b4.render();
    b4.drawText();
-  
+   b4.isClicked();
 }
 
 //Code for handling keys
