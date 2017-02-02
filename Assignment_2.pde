@@ -11,6 +11,7 @@ ControlP5 cp5;
 //used to store players score and name
 import java.io.FileWriter;
 File file;
+Table table;
 
 //Gravity and other useful constants
 final float GRAVITY = 5;
@@ -87,7 +88,9 @@ void setup()
     gameObjects.add(t);
     
     //for writing player scores to file
-    file = new File("scores.tsv");
+    //It defaults to wherever processing is saved on the hard drive. I could not find how to have the file default to wherever the sketch is saved. I am not sure if this will
+    //work on your computer.
+    file = new File("C:\\Users\\Ronan\\Documents\\College\\Year 2\\Semester 1\\Object Oriented Programming\\Assignment_2\\scores.tsv");
     //start at menu
     mode = 0;
     
@@ -101,6 +104,9 @@ void setup()
     
     //get user name
     cp5 = new ControlP5(this);
+    cp5.setColorForeground(#FFFF00);
+    cp5.setColorBackground(0);
+    cp5.setColorActive(#FFFF00);
 
     cp5.addTextfield("name").setPosition(width/3 + 25, 150).setSize(100, 50).setAutoClear(false);
 
@@ -108,6 +114,9 @@ void setup()
     
     //init buttons
     initButtons();
+    
+    //init table to read scores
+    table = loadTable("scores.tsv","header");
     
     
    
@@ -179,6 +188,7 @@ void draw()
     case 5:
       background(0);
       text("Leaderboard", width/2, height/2);
+      printLeaderBoard();
       break;
         
         
@@ -312,7 +322,19 @@ void drawMenu()
    b4.render();
    b4.drawText();
    b4.isClicked();
-}
+}//edn drawMenu()
+
+void printLeaderBoard()
+{
+    String[] scores = loadStrings("scores.tsv");
+    for(int i = 0; i < scores.length; i++)
+    {
+       System.out.println(i + ") " + scores[i]); 
+    }
+
+    
+  
+}//end printLeaderBoard()
 
 //Code for handling keys
 void keyPressed()

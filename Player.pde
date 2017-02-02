@@ -270,11 +270,11 @@ class Player extends GameObject
   
   void render()
   {
-    text("Score: " + playerScore, 20,20);
-    text("Name: " + name, 20,50);
+    text("Score: " + playerScore, 30,20);
+    text("Name: " + name, 30,50);
     pushMatrix(); // Stores the current transform
     translate(pos.x, pos.y);
-    text("Health" + health,30,-0);
+    text("Health" + health,50,-0);
     displayName();
    
     //rotate(theta);    
