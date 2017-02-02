@@ -174,6 +174,8 @@ void draw()
         break;
     case 2:
         background(0);
+        cp5.remove("name");
+        cp5.remove("submit");
         text("ReadME", width/2, height/2);//to do
         break;
     case 3:
@@ -181,13 +183,17 @@ void draw()
         exit(); 
         break;
     case 4:
+        cp5.remove("name");
+        cp5.remove("submit");
         drawScoreScreen();
         //scoreScreen.writeToFile();
         break;
         
     case 5:
       background(0);
-      text("Leaderboard", width/2, height/2);
+      cp5.remove("name");
+        cp5.remove("submit");
+      //text("Leaderboard", width/2, height/2);
       printLeaderBoard();
       break;
         
@@ -324,13 +330,33 @@ void drawMenu()
    b4.isClicked();
 }//edn drawMenu()
 
+
+//wont work if file is empty!!!
 void printLeaderBoard()
 {
+    float leaderBoardSpaceing = 100;
     String[] scores = loadStrings("scores.tsv");
+    //top 3 scores kept
+    
+    //store top 3 scoresto be written to screen
+    String first, second, third;
+    first = scores[0];
+    second = scores[1];
+    third = scores[2];
+    
+    //display entire score board in console
     for(int i = 0; i < scores.length; i++)
     {
-       System.out.println(i + ") " + scores[i]); 
+       System.out.println(i + 1 + ") " + scores[i]); 
     }
+    
+  
+      text(first, width/2, height/2);
+      text(second, width/2, height/2 + leaderBoardSpaceing);
+      text(third, width/2,  height/2 + (leaderBoardSpaceing * 2));
+    
+    
+    
 
     
   
