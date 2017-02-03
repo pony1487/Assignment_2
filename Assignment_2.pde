@@ -128,10 +128,7 @@ void setup()
     
     //used for reading files
     reader = createReader("scores.tsv");
-    //intialise score array list with default values. This stops the program crashing if there are no scores to display to the screen
-    leaderBoardScores.add("NoScore");
-    leaderBoardScores.add("NoScore");
-    leaderBoardScores.add("NoScore");
+   
     
    
  
@@ -353,22 +350,7 @@ void printLeaderBoard()
 {
     float leaderBoardSpaceing = 100;
     String line;
-    /*
-    String[] scores = loadStrings("scores.tsv");
-    //top 3 scores kept
-    
-    //store top 3 scoresto be written to screen
-    String first, second, third;
-    first = scores[0];
-    second = scores[1];
-    third = scores[2];
-    
-    //display entire score board in console
-    for(int i = 0; i < scores.length; i++)
-    {
-       System.out.println(i + 1 + ") " + scores[i]); 
-    }
-    */
+    String[] temp = new String[3];
   try 
   {
     line = reader.readLine();
@@ -388,13 +370,27 @@ void printLeaderBoard()
     
    leaderBoardScores.add(line);
   }
-    
   
-      text(leaderBoardScores.get(0), width/2, height/2);
-      text(leaderBoardScores.get(1), width/2, height/2 + leaderBoardSpaceing);
-      text(leaderBoardScores.get(2), width/2,  height/2 + (leaderBoardSpaceing * 2));
+  //this is the only way I could this to work. It copies the 3 scores into a temp array. If I dont do this the program crashes while trying
+  //to print the arrayList if the file is empty
+  for(int i = 0; i < leaderBoardScores.size();i++)
+  {
+     if(leaderBoardScores.get(i) == null)
+     {
+        //leaderBoardScores.set(i, "No Score");
+        temp[i] = "No Score";
+     }
+     else
+     {
+        temp[i] = leaderBoardScores.get(i); 
+     }
+  }
+    
       
-      
+      //display scores
+      text("1) " + temp[0] , width/2, height/2);
+      text("2) " + temp[1], width/2, height/2 + leaderBoardSpaceing);
+      text("3) " + temp[2], width/2,  height/2 + (leaderBoardSpaceing * 2));
       
     
      
