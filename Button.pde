@@ -43,6 +43,10 @@ class Button
           
           if(mousePressed)
           {
+            if(text == "Play")
+            {
+               mode = 1; 
+            }
             if(text == "Readme")
             {
                 mode = 2;

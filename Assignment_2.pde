@@ -13,6 +13,8 @@ import java.io.FileWriter;
 File file;
 Table table;
 
+BufferedReader reader;
+
 //Gravity and other useful constants
 final float GRAVITY = 5;
 float timeDelta = 1.0f / 60.0f;
@@ -42,6 +44,8 @@ float groundHeight;
 //ArrayLists
 ArrayList<GameObject> gameObjects = new ArrayList<GameObject>();
 boolean[] keys = new boolean[1000];//this and check keys are bryans code
+ArrayList<String> leaderBoardScores = new ArrayList<String>();
+
 
 
 //mode for each screen;
@@ -118,6 +122,16 @@ void setup()
     //init table to read scores
     table = loadTable("scores.tsv","header");
     
+    //init player
+    //initPlayer();
+    
+    
+    //used for reading files
+    reader = createReader("scores.tsv");
+    //intialise score array list with default values. This stops the program crashing if there are no scores to display to the screen
+    leaderBoardScores.add("NoScore");
+    leaderBoardScores.add("NoScore");
+    leaderBoardScores.add("NoScore");
     
    
  
@@ -313,8 +327,11 @@ void initButtons()
 
 void drawMenu()
 {
-   //b1.render();
-   //b1.drawText();
+  /*
+   b1.render();
+   b1.drawText();
+   b1.isClicked();
+   */
    
    b2.render();
    b2.drawText();
@@ -335,6 +352,8 @@ void drawMenu()
 void printLeaderBoard()
 {
     float leaderBoardSpaceing = 100;
+    String line;
+    /*
     String[] scores = loadStrings("scores.tsv");
     //top 3 scores kept
     
@@ -349,13 +368,36 @@ void printLeaderBoard()
     {
        System.out.println(i + 1 + ") " + scores[i]); 
     }
+    */
+  try 
+  {
+    line = reader.readLine();
+  } 
+  catch (IOException e) 
+  {
+    e.printStackTrace();
+    line = null;
+  }
+  if (line == null) 
+  {
+    // Stop reading because of an error or file is empty
+    noLoop();  
+  } 
+  else 
+  {
+    
+   leaderBoardScores.add(line);
+  }
     
   
-      text(first, width/2, height/2);
-      text(second, width/2, height/2 + leaderBoardSpaceing);
-      text(third, width/2,  height/2 + (leaderBoardSpaceing * 2));
+      text(leaderBoardScores.get(0), width/2, height/2);
+      text(leaderBoardScores.get(1), width/2, height/2 + leaderBoardSpaceing);
+      text(leaderBoardScores.get(2), width/2,  height/2 + (leaderBoardSpaceing * 2));
+      
+      
+      
     
-    
+     
     
 
     
@@ -376,6 +418,11 @@ void keyPressed()
   if(key == 'w')
   {
       scoreScreen.writeToFile();//writes to default processing location, look into changing this!
+  }
+  
+  if(key =='h')
+  {
+     mode = 0; 
   }
 }
 void keyReleased()

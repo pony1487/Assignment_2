@@ -263,6 +263,7 @@ class Player extends GameObject
      if(health <= 0)
      {
         mode = 4; 
+        //scores.add(playerScore);
      }
    
   
