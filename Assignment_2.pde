@@ -25,6 +25,7 @@ Button b1;
 Button b2;
 Button b3;
 Button b4;
+Button b5;
 
 
 //spawn times
@@ -319,11 +320,14 @@ void initButtons()
     b2 = new Button(buttonWidth, buttonHeight,buttonX, buttonY + buttonSpacing, "Readme");
     b3 = new Button(buttonWidth, buttonHeight,buttonX, buttonY + (buttonSpacing * 2), "LeaderBoard");
     b4 = new Button(buttonWidth, buttonHeight,buttonX, buttonY + (buttonSpacing * 3), "Exit");
+    b5 = new Button(buttonWidth, buttonHeight, buttonX, buttonY + (buttonSpacing * 3.75), "Home");
   
 }//end initButtons()
 
 void drawMenu()
 {
+  textSize(32);
+  text("IGN 10/10", width/2, 100);
   /*
    b1.render();
    b1.drawText();
@@ -348,6 +352,8 @@ void drawMenu()
 //wont work if file is empty!!!
 void printLeaderBoard()
 {
+    textSize(32);
+    text("LeaderBoard", width/2, 100);    
     float leaderBoardSpaceing = 100;
     String line;
     String[] temp = new String[3];
@@ -371,6 +377,8 @@ void printLeaderBoard()
    leaderBoardScores.add(line);
   }
   
+  
+  textSize(26);
   //this is the only way I could this to work. It copies the 3 scores into a temp array. If I dont do this the program crashes while trying
   //to print the arrayList if the file is empty
   for(int i = 0; i < leaderBoardScores.size();i++)
@@ -388,11 +396,16 @@ void printLeaderBoard()
     
       
       //display scores
+      fill(255);
       text("1) " + temp[0] , width/2, height/2);
       text("2) " + temp[1], width/2, height/2 + leaderBoardSpaceing);
       text("3) " + temp[2], width/2,  height/2 + (leaderBoardSpaceing * 2));
       
-    
+      
+    //not working  
+    b5.render();
+    b5.drawText();
+    b5.isClicked();
      
     
 

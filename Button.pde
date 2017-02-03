@@ -27,8 +27,9 @@ class Button
      
      void drawText()
      {
+         textSize(14);
          textAlign(CENTER);
-      
+          fill(255);
          text(text, x + w/2, y + h / 2);
      }
      
@@ -60,6 +61,11 @@ class Button
             if(text == "Exit")
             {
                 mode = 3;
+            }
+            
+            if(text == "Home")
+            {
+               mode = 0; 
             }
           }//end if
          
