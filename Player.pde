@@ -6,8 +6,19 @@ class Player extends GameObject
   float jumpTime = 1.0;//mot used here, might be useful in future
   boolean isJumping;
   float theta;
-  PShape shape;
+  
+  //for animation
+  PShape shape;//bryans Ship
   PImage sprite;
+  
+  PImage sprites[];
+  /*
+    0 = normal
+    1 = jump
+    2 = left
+  */
+  int animMode;//used to flip between sprites
+  
   int health;
   
   float fireRate = 2;
@@ -34,6 +45,20 @@ class Player extends GameObject
     sprite = loadImage("player.png");//not working yet
     health = 100;
     this.name = name;
+    
+    //set up array of sprites for animation
+    //3 images, normal, jumping and left
+    sprites = new PImage[3];
+    
+    sprites[0] = loadImage("commando.png"); 
+    sprites[1] = loadImage("commando1.png");
+    sprites[2] = loadImage("commando2.png");
+          
+    sprites[0].resize(100,100);
+    sprites[1].resize(100,100);
+    sprites[2].resize(100,100);
+    //default animation is 0 in array      
+    animMode = 0;
   
   }
   
@@ -84,22 +109,28 @@ class Player extends GameObject
     forward.x = sin(theta);
     forward.y  = -cos(theta);
     
-    if(checkKey(UP))
+    if(keyPressed && checkKey(UP))
     {
       isJumping = true;
       
       pos.y = pos.y - 5;
+      animMode = 1;
       //theta = -1; //Not working
       
       //println("Pos.y = " + pos.y);
       //println("Vel.y = " +  velocity.y);
       
     }
+    else
+    {
+       animMode = 0; 
+    }
  
    
     if(checkKey(LEFT))
     {
        velocity.x = velocity.x - 5;
+       animMode = 2;
        //theta = -1.5; //works when theta is not set to -1 when up is pressed
     }
  
@@ -271,6 +302,11 @@ class Player extends GameObject
   
   void render()
   {
+    //do animation by flipping array index betwen 1 and 3
+    
+    image(sprites[animMode],pos.x - 50, pos.y - 50);
+    
+    
     text("Score: " + playerScore, 30,20);
     text("Name: " + name, 30,50);
     pushMatrix(); // Stores the current transform
@@ -280,8 +316,8 @@ class Player extends GameObject
    
     //rotate(theta);    
     // Use a PShape();
-    shape(shape, 0, 0);
-    //image(sprite,width/2, height/2); // Not working, fix it
+    //shape(shape, 0, 0);
+     
     popMatrix(); // Restore the transform
   }
   

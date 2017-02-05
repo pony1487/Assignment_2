@@ -74,7 +74,7 @@ ScoreScreen scoreScreen;
 Terrain t;
 
 //used to make sure  drawCP5Buttons() is called once so it doesnt keep creating textbox 60fps
- boolean  cp5Called = false;
+ boolean  cp5Called;
 
 void setup()
 {
@@ -116,24 +116,20 @@ void setup()
     cp5.setColorBackground(0);
     cp5.setColorActive(#FFFF00);
 
-    /*
-    cp5.addTextfield("name").setPosition(width/3 + 25, 150).setSize(100, 50).setAutoClear(false);
-
-    
-    cp5.addBang("submit").setPosition(width/2, 150).setSize(100, 50).setLabel("SUBMIT");
-    */
+ 
     //init buttons
     initButtons();
     
     //init table to read scores
+    //is this used???? Check and delete if not
     table = loadTable("scores.tsv","header");
-    
-    //init player
-    //initPlayer();
     
     
     //used for reading files
     reader = createReader("scores.tsv");
+    
+    //reset flag
+    cp5Called = false;
    
     
    
@@ -150,6 +146,8 @@ void draw()
          background(0);
          
          drawMenu();
+         
+         //ensure the text/submit field is only draw once
          if(!cp5Called)
          {
            drawCP5Buttons();
@@ -228,20 +226,9 @@ void draw()
       //text("Leaderboard", width/2, height/2);
       //reset the boolean so when you go back to the main menu you can enter a name again
         cp5Called = false;
-     
-     
       break;
-        
-        
-        
-        
-  
-
-  }
-  
+  }//end switch
  
-  
-  
 }//end draw
  
 
@@ -325,6 +312,10 @@ void drawScoreScreen()
     scoreScreen.update();
     scoreScreen.render();
     
+       b5.render();
+    b5.drawText();
+    b5.isClicked();
+    
 }//end drawGameOver
 
 
@@ -351,11 +342,6 @@ void drawMenu()
 {
   textSize(32);
   text("IGN 10/10", width/2, 100);
-  /*
-   b1.render();
-   b1.drawText();
-   b1.isClicked();
-   */
    
    b2.render();
    b2.drawText();
@@ -370,17 +356,12 @@ void drawMenu()
    b4.drawText();
    b4.isClicked();
    
-   
-   
-   
 }//edn drawMenu()
 
 
 //wont work if file is empty!!!
 void printLeaderBoard()
-{
-  
-      //not working  
+{  
     b5.render();
     b5.drawText();
     b5.isClicked();
@@ -392,9 +373,7 @@ void printLeaderBoard()
     float leaderBoardSpaceing = 100;
     String line;
     String[] temp = new String[3];
-
-    
-    
+  
   try 
   {
     line = reader.readLine();
@@ -415,7 +394,6 @@ void printLeaderBoard()
     
    leaderBoardScores.add(line);
   }
-  
   
   textSize(26);
   //this is the only way I could this to work. It copies the 3 scores into a temp array. If I dont do this the program crashes while trying
@@ -440,13 +418,6 @@ void printLeaderBoard()
       text("2) " + temp[1], width/2, height/2 + leaderBoardSpaceing);
       text("3) " + temp[2], width/2,  height/2 + (leaderBoardSpaceing * 2));
       
-      
-  
-     
-    
-
-    
-  
 }//end printLeaderBoard()
 
 void drawReadMe()
@@ -483,12 +454,7 @@ void keyPressed()
   {
       scoreScreen.writeToFile();//writes to default processing location, look into changing this!
   }
-  
-  if(key =='h')
-  {
-    
-    mode = 0; 
-  }
+ 
 }
 void keyReleased()
 {

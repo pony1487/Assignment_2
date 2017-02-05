@@ -45,10 +45,12 @@ class ScoreScreen //NOT game object
     {
        background(0);
        fill(255,0,0);
+       textSize(40);
        text("YOU DIED!! ", width/2, height/2);
+       textSize(26);
        text(s + "!! You scored: " + playerScore, width/2 - 25, height/2 + 50);
        text("Press 'w' to write your score to leader board file",width/2 - 25, height/2 + 75);
-       text("Press 'h' to return to the menu",width/2 - 25, height/2 + 85);
+       
        
      
 
