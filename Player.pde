@@ -19,6 +19,9 @@ class Player extends GameObject
   */
   int animMode;//used to flip between sprites
   int AnimationArraySize = 6;
+  float soundTimePassed;
+  float soundDuration = 1.0 / 2.0;
+  boolean soundIsPlaying;
   
   int health;
   
@@ -66,6 +69,8 @@ class Player extends GameObject
     sprites[5].resize(100,100);
     //default animation is 0 in array      
     animMode = 0;
+    
+    soundIsPlaying = false;
   
   }
   
@@ -120,9 +125,11 @@ class Player extends GameObject
     if(keyPressed && checkKey(UP))
     {
       isJumping = true;
+      soundIsPlaying = true;
       
       pos.y = pos.y - 5;
       animMode = 1;
+      jetPack.play();
       //theta = -1; //Not working
       
       //println("Pos.y = " + pos.y);
@@ -131,7 +138,15 @@ class Player extends GameObject
     }
     else
     {
-       animMode = 0; 
+       animMode = 0;
+       soundIsPlaying = false;
+       
+    }
+    
+    if(!soundIsPlaying)
+    {
+      jetPack.rewind();
+      jetPack.pause();
     }
  
    
@@ -207,6 +222,9 @@ class Player extends GameObject
        //println("FIRE!");
        animMode = 3;
        
+       //play gunsound
+       gunSound.play();
+       
        if(timePassed > fireRatePerSec)
        {
        PVector bp = PVector.add(pos, PVector.mult(forward, 40));
@@ -214,6 +232,8 @@ class Player extends GameObject
        //Bullet b = new Bullet(pos.x, pos.y, 0,20);
        gameObjects.add(b);
        timePassed = 0;
+        //reset the gunSound
+       gunSound.rewind();
        }
      }
      
@@ -236,6 +256,7 @@ class Player extends GameObject
            {
                health--;
                animMode = 5;
+               playerHit.play();
                //println("health:" + health);
            }
           
@@ -255,9 +276,11 @@ class Player extends GameObject
            {
                health--;
                 animMode = 5;
+                playerHit.play();
+                
                //println("health:" + health);
            }
-           
+          
            
        }//end if Enemy
      
@@ -302,20 +325,29 @@ class Player extends GameObject
      
      }//end for
      
+   
      
      
      //increment time passed
      timePassed += timeDelta;
+     soundTimePassed += timeDelta;//used to reset the sounds
      //println(timePassed);
      
      
+     //rest player getting hit sound
+     if(soundTimePassed > soundDuration)
+     {  
+        playerHit.rewind();
+        
+        soundTimePassed = 0; 
+     }
      //check for Death/GameOver
      if(health <= 0)
      {
         mode = 4; 
         //scores.add(playerScore);
      }
-   
+    
   
   }//end update()
   

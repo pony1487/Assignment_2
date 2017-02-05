@@ -2,11 +2,22 @@
   c15737505
   Object Oriented Programming
   Assignment 2
+  
+  BUGS:
+  -Game goes straight to game overs screen if player plays a game and dies, it wont let player re-enter their name and play again
 
 */
 //used for text input on screen
 import controlP5.*;
 ControlP5 cp5;
+
+//audio stuff
+import ddf.minim.*;
+Minim minim;
+AudioPlayer gunSound;
+AudioPlayer playerHit;
+AudioPlayer playerDies;
+AudioPlayer jetPack;
 
 //used to store players score and name
 import java.io.FileWriter;
@@ -130,7 +141,13 @@ void setup()
     
     //reset flag
     cp5Called = false;
-   
+    
+     //init audio stuff
+    minim = new Minim(this);
+    gunSound = minim.loadFile("gunSound.mp3");
+    playerHit = minim.loadFile("playerHit.mp3");
+    playerDies = minim.loadFile("playerDies.mp3");
+    jetPack = minim.loadFile("jetPack.mp3");
     
    
  
@@ -151,7 +168,10 @@ void draw()
          if(!cp5Called)
          {
            drawCP5Buttons();
+           
          }
+         
+         
          break;
     case 1:
         //background(0);
@@ -159,10 +179,7 @@ void draw()
         cp5.remove("name");
         cp5.remove("submit");
         
-        //reset the boolean so when you go back to the main menu you can enter a name again
-        cp5Called = false;
        
-        
         image(backgroundImage, 0,0);
         drawGameObjects();
         drawGround();
@@ -193,6 +210,9 @@ void draw()
         enemySpawnTime += timeDelta;
         bPowerupSpawnTime += timeDelta;
         sPowerUpSpawnTime += timeDelta;
+        
+        //reset the boolean so when you go back to the main menu you can enter a name again
+        cp5Called = false;
         break;
     case 2:
         background(0);
@@ -211,11 +231,10 @@ void draw()
     case 4:
         cp5.remove("name");
         cp5.remove("submit");
-        drawScoreScreen();
-        //scoreScreen.writeToFile();
-        
-        //reset the boolean so when you go back to the main menu you can enter a name again
         cp5Called = false;
+        drawScoreScreen();
+        
+       
         break;
         
     case 5:
@@ -236,17 +255,11 @@ void submit()
 {
     userName=cp5.get(Textfield.class, "name").getText();
     
-    //error checking is not working here.FIX
-    if(userName == " ")
-    {
-       println("Error: please provide name");
-       mode = 0;
-    }
-    else
-    {
+  
     initPlayer();
     mode = 1;
-    }
+    
+    
     
 }
 
@@ -312,9 +325,12 @@ void drawScoreScreen()
     scoreScreen.update();
     scoreScreen.render();
     
-       b5.render();
+    playerDies.play();
+    
+    b5.render();
     b5.drawText();
     b5.isClicked();
+    
     
 }//end drawGameOver
 
@@ -355,6 +371,9 @@ void drawMenu()
    b4.render();
    b4.drawText();
    b4.isClicked();
+   
+   //reset the player dying sound so it will play again player does not exit after dying
+   playerDies.rewind();
    
 }//edn drawMenu()
 
