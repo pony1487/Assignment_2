@@ -65,7 +65,8 @@ class Button
             
             if(text == "Home")
             {
-               mode = 0; 
+               mode = 0;
+               
             }
           }//end if
          

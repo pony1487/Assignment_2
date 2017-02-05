@@ -145,6 +145,7 @@ void draw()
          background(0);
          //text("IGN 10/10", width/2 - 50, height/2);//to do
          drawMenu();
+   
          break;
     case 1:
         //background(0);
@@ -189,6 +190,7 @@ void draw()
         cp5.remove("name");
         cp5.remove("submit");
         text("ReadME", width/2, height/2);//to do
+        drawReadMe();
         break;
     case 3:
         
@@ -203,10 +205,12 @@ void draw()
         
     case 5:
       background(0);
+       printLeaderBoard();
       cp5.remove("name");
         cp5.remove("submit");
       //text("Leaderboard", width/2, height/2);
-      printLeaderBoard();
+     
+     
       break;
         
         
@@ -346,17 +350,32 @@ void drawMenu()
    b4.render();
    b4.drawText();
    b4.isClicked();
+   
+   
+   
+   
 }//edn drawMenu()
 
 
 //wont work if file is empty!!!
 void printLeaderBoard()
 {
+  
+      //not working  
+    b5.render();
+    b5.drawText();
+    b5.isClicked();
+    
     textSize(32);
-    text("LeaderBoard", width/2, 100);    
+    
+    text("LeaderBoard", width/2, 100);
+    
     float leaderBoardSpaceing = 100;
     String line;
     String[] temp = new String[3];
+
+    
+    
   try 
   {
     line = reader.readLine();
@@ -369,7 +388,8 @@ void printLeaderBoard()
   if (line == null) 
   {
     // Stop reading because of an error or file is empty
-    noLoop();  
+    //this causes bug which stops the home button being pressed. 
+    //noLoop();  
   } 
   else 
   {
@@ -402,16 +422,20 @@ void printLeaderBoard()
       text("3) " + temp[2], width/2,  height/2 + (leaderBoardSpaceing * 2));
       
       
-    //not working  
-    b5.render();
-    b5.drawText();
-    b5.isClicked();
+  
      
     
 
     
   
 }//end printLeaderBoard()
+
+void drawReadMe()
+{
+    b5.render();
+    b5.drawText();
+    b5.isClicked();
+}//end drawReadme()
 
 //Code for handling keys
 void keyPressed()
@@ -431,7 +455,8 @@ void keyPressed()
   
   if(key =='h')
   {
-     mode = 0; 
+    
+    mode = 0; 
   }
 }
 void keyReleased()
