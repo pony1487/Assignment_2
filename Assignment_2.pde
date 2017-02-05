@@ -5,7 +5,7 @@
   
   BUGS:
   -Game goes straight to game overs screen if player plays a game and dies, it wont let player re-enter their name and play again
-
+  -Bullet sprites wont fire from the player
 */
 //used for text input on screen
 import controlP5.*;
@@ -18,6 +18,7 @@ AudioPlayer gunSound;
 AudioPlayer playerHit;
 AudioPlayer playerDies;
 AudioPlayer jetPack;
+AudioPlayer enemyExplosion;
 
 //used to store players score and name
 import java.io.FileWriter;
@@ -148,6 +149,7 @@ void setup()
     playerHit = minim.loadFile("playerHit.mp3");
     playerDies = minim.loadFile("playerDies.mp3");
     jetPack = minim.loadFile("jetPack.mp3");
+    enemyExplosion = minim.loadFile("enemyExplosion.mp3");
     
    
  

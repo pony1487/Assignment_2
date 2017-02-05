@@ -3,6 +3,8 @@ class Enemy extends GameObject
   int health;
   float size;
   //float speed;
+  float soundTimePassed;
+  float soundDuration = 1.0;
   
   
   Enemy(float x, float y)
@@ -46,6 +48,7 @@ class Enemy extends GameObject
          if( dist(b.pos.x, b.pos.y, this.pos.x, this.pos.y) < size/2 )
          {
              gameObjects.remove(this);
+             enemyExplosion.play();
              //this is global. Is there a better way to do this so it updates variable of player object instead
              playerScore++;
              //how do access the points varaible in player without making it gloabl
@@ -54,6 +57,16 @@ class Enemy extends GameObject
         
       }
     }//end for
+    
+     soundTimePassed += timeDelta;//used to reset the sounds
+         //rest Enemy getting hit sound
+     if(soundTimePassed > soundDuration)
+     {  
+       enemyExplosion.rewind();
+       enemyExplosion.pause();
+        
+        soundTimePassed = 0; 
+     } 
   }
   
   void render()

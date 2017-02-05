@@ -5,6 +5,8 @@ class Bullet extends GameObject
   float speed = 200;
   float alive;
   float timeToLive;
+  PImage sprite;
+  float spriteX, spriteY;
   
   Bullet(float x, float y, float theta, float size,float timeToLive)
   {
@@ -14,6 +16,7 @@ class Bullet extends GameObject
     this.size = size;
     this.timeToLive = timeToLive;
     this.alive = 0;
+    sprite = loadImage("bullet.png");
     
   }
   
@@ -58,12 +61,18 @@ class Bullet extends GameObject
 
   void render()
   {
+    spriteX = pos.x;
+    spriteY = pos.y;
+    image(sprite,spriteX,spriteY);
     pushMatrix();
     translate(pos.x, pos.y);
+    
+    
     rotate(theta);
     stroke(255);
     line(0, - size / 2, 0, size / 2);
     popMatrix();
+    
   }
   
   
