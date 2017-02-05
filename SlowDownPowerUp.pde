@@ -7,11 +7,16 @@ class SlowDownPowerUp extends GameObject implements Powerup
   float effectTime = 0;
   float effectDuration = 1.0/ 0.25;
   
+  PImage beer;
+  
   SlowDownPowerUp(float x, float y, int timeToLive)
   {
     this.pos = new PVector(x,y);
     this.timeToLive = timeToLive;
-    this.size = 20;
+    this.size = 50;
+    
+    beer = loadImage("beer.png");
+    beer.resize(size,size);
    ;
   }
   
@@ -84,7 +89,7 @@ class SlowDownPowerUp extends GameObject implements Powerup
        {
           Player temp = (Player)go;
           
-          if( ((pos.x + size/2) >= temp.pos.x  && (pos.x - size/2) <= temp.pos.x) && (pos.y + size) >= temp.pos.y)
+          if( ((pos.x + size) >= temp.pos.x  && (pos.x - size) <= temp.pos.x) && (pos.y + size) >= temp.pos.y)
           {
             gameObjects.remove(this);
           }
@@ -96,7 +101,8 @@ class SlowDownPowerUp extends GameObject implements Powerup
   void render()
   {
     fill(0,255,0);
-    rect(pos.x,pos.y, size, size * 2);
+    //rect(pos.x,pos.y, size, size * 2);
+    image(beer, pos.x,pos.y);
       
   }
     

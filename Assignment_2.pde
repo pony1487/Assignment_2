@@ -5,7 +5,7 @@
   
   BUGS:
   -Game goes straight to game overs screen if player plays a game and dies, it wont let player re-enter their name and play again
-  -Bullet sprites wont fire from the player
+ 
 */
 //used for text input on screen
 import controlP5.*;
@@ -104,8 +104,9 @@ void setup()
     groundImage = loadImage("ground.png");
     groundImage.resize(width,100);
     
-    //t = new Terrain();
-    //gameObjects.add(t);
+    //make new terrain add it to array
+    t = new Terrain();
+    gameObjects.add(t);
     
     //for writing player scores to file
     //It defaults to wherever processing is saved on the hard drive. I could not find how to have the file default to wherever the sketch is saved. I am not sure if this will

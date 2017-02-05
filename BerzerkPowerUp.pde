@@ -3,6 +3,7 @@ class BerzerkPowerUp extends GameObject implements Powerup
   int size;
   float timeToLive;
   float timeAlive;
+  PImage heart;
   
   BerzerkPowerUp(float x, float y,float timeToLive)
   {
@@ -10,6 +11,8 @@ class BerzerkPowerUp extends GameObject implements Powerup
     this.pos = new PVector(x,y);
     this.timeToLive = timeToLive;
     this.timeAlive = 0;
+    heart = loadImage("heart.png");
+    heart.resize(size,size);
   }
   
   void applyTo(Player p)
@@ -51,7 +54,7 @@ class BerzerkPowerUp extends GameObject implements Powerup
        {
           Player temp = (Player)go;
           
-          if( ((pos.x + size/2) >= temp.pos.x  && (pos.x - size/2) <= temp.pos.x) && (pos.y + size) >= temp.pos.y)
+          if( ((pos.x + size) >= temp.pos.x  && (pos.x - size) <= temp.pos.x) && (pos.y + size) >= temp.pos.y)
           {
             gameObjects.remove(this);
           }
@@ -64,7 +67,8 @@ class BerzerkPowerUp extends GameObject implements Powerup
   {
     //draw a heart or heart sprite
     fill(255,0,0);
-    rect(pos.x,pos.y, size, size);
+    //rect(pos.x,pos.y, size, size);
+    image(heart,pos.x,pos.y);
   }
     
   

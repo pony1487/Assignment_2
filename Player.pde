@@ -294,7 +294,7 @@ class Player extends GameObject
        if(go instanceof BerzerkPowerUp)
        {
          BerzerkPowerUp temp_berzerk = (BerzerkPowerUp)go;
-         if( ((pos.x + size/2) >= temp_berzerk.pos.x && (pos.x - size/2) <= temp_berzerk.pos.x) && ( (pos.y + size/2) >= temp_berzerk.pos.y && (pos.y - size/2) <= temp_berzerk.pos.y))
+         if( ((pos.x + size) >= temp_berzerk.pos.x && (pos.x - size) <= temp_berzerk.pos.x) && ( (pos.y + size) >= temp_berzerk.pos.y && (pos.y - size) <= temp_berzerk.pos.y))
           {
                temp_berzerk.applyTo(this);
                //println("health:" + health);
@@ -313,7 +313,7 @@ class Player extends GameObject
        if(go instanceof SlowDownPowerUp)
        {
          SlowDownPowerUp temp_slow = (SlowDownPowerUp)go;
-         if( ((pos.x + size/2) >= temp_slow.pos.x && (pos.x - size/2) <= temp_slow.pos.x) && ( (pos.y + size/2) >= temp_slow.pos.y && (pos.y - size/2) <= temp_slow.pos.y))
+         if( ((pos.x + size) >= temp_slow.pos.x && (pos.x - size) <= temp_slow.pos.x) && ( (pos.y + size) >= temp_slow.pos.y && (pos.y - size) <= temp_slow.pos.y))
           {
                temp_slow.slowDown();
                    
