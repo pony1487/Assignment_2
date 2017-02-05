@@ -5,6 +5,8 @@ class Enemy extends GameObject
   //float speed;
   float soundTimePassed;
   float soundDuration = 1.0;
+  boolean isDead;
+  PImage enemyDie;
   
   
   Enemy(float x, float y)
@@ -12,6 +14,8 @@ class Enemy extends GameObject
     this.pos = new PVector(x, y);
     this.size = 20;
     //this.speed = 1;
+    enemyDie = loadImage("ememyExplosion.png");
+    this.isDead = false;
   }
   
   void update()
@@ -45,9 +49,13 @@ class Enemy extends GameObject
          Bullet b = (Bullet)go;
          
          
-         if( dist(b.pos.x, b.pos.y, this.pos.x, this.pos.y) < size/2 )
+         if( dist(b.pos.x, b.pos.y, this.pos.x, this.pos.y) < size )
          {
+             this.isDead = true;
+              
              gameObjects.remove(this);
+             //image(enemyDie, this.pos.x - 50,this.pos.y);//This should be in render
+             
              enemyExplosion.play();
              //this is global. Is there a better way to do this so it updates variable of player object instead
              playerScore++;
@@ -67,12 +75,29 @@ class Enemy extends GameObject
         
         soundTimePassed = 0; 
      } 
+     
+     //this works here but should be in render() i think
+     if(isDead)
+    {
+        image(enemyDie, this.pos.x - 50,this.pos.y); 
+      
+    }
   }
   
   void render()
   {
     fill(0);
     ellipse(pos.x,pos.y, size, size);
+    
+    
+    //This does not work here???
+    if(isDead)
+    {
+        //image(enemyDie, 0,0); 
+        println("Is dead");
+      
+    }
+    
   }
   
 }

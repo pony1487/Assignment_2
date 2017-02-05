@@ -104,8 +104,8 @@ void setup()
     groundImage = loadImage("ground.png");
     groundImage.resize(width,100);
     
-    t = new Terrain();
-    gameObjects.add(t);
+    //t = new Terrain();
+    //gameObjects.add(t);
     
     //for writing player scores to file
     //It defaults to wherever processing is saved on the hard drive. I could not find how to have the file default to wherever the sketch is saved. I am not sure if this will
@@ -468,7 +468,7 @@ void keyPressed()
   {
     mode = key - '0';
   }
-  println(mode);
+  //println(mode);
   
   //do if key == 'w', write to file
   if(key == 'w')

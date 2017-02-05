@@ -17,6 +17,7 @@ class Bullet extends GameObject
     this.timeToLive = timeToLive;
     this.alive = 0;
     sprite = loadImage("bullet.png");
+    sprite.resize(250,250);
     
   }
   
@@ -27,9 +28,9 @@ class Bullet extends GameObject
     
     pos.add(PVector.mult(PVector.mult(forward, speed), timeDelta));
    
-    //println("Bullet x = " + pos.x);
-    //println("Bullet y = " + pos.y);
-    
+   
+ 
+
     
     //remove the bullets if they go offscreen
   if (pos.x > width)
@@ -56,24 +57,32 @@ class Bullet extends GameObject
     {
        gameObjects.remove(this); 
     }
+   
+
   
 }
 
   void render()
   {
-    spriteX = pos.x;
-    spriteY = pos.y;
-    image(sprite,spriteX,spriteY);
+    
     pushMatrix();
     translate(pos.x, pos.y);
     
     
     rotate(theta);
     stroke(255);
-    line(0, - size / 2, 0, size / 2);
+    line(0, - size / 2, 0, size / 2);//original bullet
+    
+    //this slows the game
+    //image(sprite,-115,-195);//this took trial and error to get the bullet sprite to fire from the player. I am not sure why it wouldnt work at 0,0
+    
     popMatrix();
     
   }
+  
+ 
+     
+  
   
   
   

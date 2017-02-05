@@ -363,7 +363,7 @@ class Player extends GameObject
     pushMatrix(); // Stores the current transform
     translate(pos.x, pos.y);
     text("Health" + health,50,-0);
-    displayName();
+    //displayName();
    
     //rotate(theta);    
     // Use a PShape();
