@@ -18,6 +18,7 @@ class Player extends GameObject
     2 = left
   */
   int animMode;//used to flip between sprites
+  int AnimationArraySize = 6;
   
   int health;
   
@@ -48,15 +49,21 @@ class Player extends GameObject
     
     //set up array of sprites for animation
     //3 images, normal, jumping and left
-    sprites = new PImage[3];
+    sprites = new PImage[AnimationArraySize];
     
     sprites[0] = loadImage("commando.png"); 
-    sprites[1] = loadImage("commando1.png");
+    sprites[1] = loadImage("commando1.png");//right jump
     sprites[2] = loadImage("commando2.png");
+    sprites[3] = loadImage("commando3.png");
+    sprites[4] = loadImage("commando4.png");//left jump
+    sprites[5] = loadImage("commandoHIT.png");
           
     sprites[0].resize(100,100);
     sprites[1].resize(100,100);
     sprites[2].resize(100,100);
+    sprites[3].resize(100,100);
+    sprites[4].resize(100,100);
+    sprites[5].resize(100,100);
     //default animation is 0 in array      
     animMode = 0;
   
@@ -90,6 +97,7 @@ class Player extends GameObject
   */
   
   //bryans shape: temporary
+  //not used
   void create()
   {
     shape = createShape();
@@ -132,6 +140,14 @@ class Player extends GameObject
        velocity.x = velocity.x - 5;
        animMode = 2;
        //theta = -1.5; //works when theta is not set to -1 when up is pressed
+    }
+    
+    //animate flying left
+     if(checkKey(LEFT) && checkKey(UP))
+    {
+      
+       animMode = 4;
+      
     }
  
     
@@ -189,6 +205,7 @@ class Player extends GameObject
      if(checkKey(' '))
      {
        //println("FIRE!");
+       animMode = 3;
        
        if(timePassed > fireRatePerSec)
        {
@@ -218,6 +235,7 @@ class Player extends GameObject
            if( ((pos.x + size/2) >= temp.x  && (pos.x - size/2) <= temp.x) && (pos.y + size) >= temp.y)
            {
                health--;
+               animMode = 5;
                //println("health:" + health);
            }
           
@@ -236,6 +254,7 @@ class Player extends GameObject
            if( ((pos.x + size/2) >= temp_enemy.pos.x && (pos.x - size/2) <= temp_enemy.pos.x) && ( (pos.y + size/2) >= temp_enemy.pos.y && (pos.y - size/2) <= temp_enemy.pos.y))
            {
                health--;
+                animMode = 5;
                //println("health:" + health);
            }
            
@@ -304,7 +323,7 @@ class Player extends GameObject
   {
     //do animation by flipping array index betwen 1 and 3
     
-    image(sprites[animMode],pos.x - 50, pos.y - 50);
+    image(sprites[animMode],pos.x - 50, pos.y - 70);
     
     
     text("Score: " + playerScore, 30,20);
