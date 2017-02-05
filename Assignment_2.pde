@@ -73,6 +73,9 @@ ScoreScreen scoreScreen;
 //"Pipes"
 Terrain t;
 
+//used to make sure  drawCP5Buttons() is called once so it doesnt keep creating textbox 60fps
+ boolean  cp5Called = false;
+
 void setup()
 {
     size(800,600);
@@ -113,10 +116,12 @@ void setup()
     cp5.setColorBackground(0);
     cp5.setColorActive(#FFFF00);
 
+    /*
     cp5.addTextfield("name").setPosition(width/3 + 25, 150).setSize(100, 50).setAutoClear(false);
 
-    cp5.addBang("submit").setPosition(width/2, 150).setSize(100, 50).setLabel("SUBMIT");
     
+    cp5.addBang("submit").setPosition(width/2, 150).setSize(100, 50).setLabel("SUBMIT");
+    */
     //init buttons
     initButtons();
     
@@ -143,15 +148,21 @@ void draw()
   {
     case 0:
          background(0);
-         //text("IGN 10/10", width/2 - 50, height/2);//to do
+         
          drawMenu();
-   
+         if(!cp5Called)
+         {
+           drawCP5Buttons();
+         }
          break;
     case 1:
         //background(0);
         //remove name box
         cp5.remove("name");
         cp5.remove("submit");
+        
+        //reset the boolean so when you go back to the main menu you can enter a name again
+        cp5Called = false;
        
         
         image(backgroundImage, 0,0);
@@ -190,6 +201,9 @@ void draw()
         cp5.remove("name");
         cp5.remove("submit");
         text("ReadME", width/2, height/2);//to do
+        
+        //reset the boolean so when you go back to the main menu you can enter a name again
+        cp5Called = false;
         drawReadMe();
         break;
     case 3:
@@ -201,6 +215,9 @@ void draw()
         cp5.remove("submit");
         drawScoreScreen();
         //scoreScreen.writeToFile();
+        
+        //reset the boolean so when you go back to the main menu you can enter a name again
+        cp5Called = false;
         break;
         
     case 5:
@@ -209,6 +226,8 @@ void draw()
       cp5.remove("name");
         cp5.remove("submit");
       //text("Leaderboard", width/2, height/2);
+      //reset the boolean so when you go back to the main menu you can enter a name again
+        cp5Called = false;
      
      
       break;
@@ -436,6 +455,18 @@ void drawReadMe()
     b5.drawText();
     b5.isClicked();
 }//end drawReadme()
+
+void drawCP5Buttons()
+{
+    cp5.addTextfield("name").setPosition(width/3 + 25, 150).setSize(100, 50).setAutoClear(false);
+
+    
+    cp5.addBang("submit").setPosition(width/2, 150).setSize(100, 50).setLabel("SUBMIT");
+    
+    cp5Called = true;
+  
+  
+}//end drawCP5Buttons()
 
 //Code for handling keys
 void keyPressed()
