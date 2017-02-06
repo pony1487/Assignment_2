@@ -7,15 +7,26 @@ class Enemy extends GameObject
   float soundDuration = 1.0;
   boolean isDead;
   PImage enemyDie;
+  PImage enemyAnimation[];
+  float animDuration = 1.0;
+  float animTimePassed;
   
   
   Enemy(float x, float y)
   {
     this.pos = new PVector(x, y);
-    this.size = 20;
+    this.size = 40;
     //this.speed = 1;
     enemyDie = loadImage("ememyExplosion.png");
     this.isDead = false;
+    
+    enemyAnimation = new PImage[2];
+    
+    enemyAnimation[0] = loadImage("enemy1.png");
+    enemyAnimation[1] = loadImage("enemy2.png");
+    
+    enemyAnimation[0].resize((int)size,(int)size);
+    enemyAnimation[1].resize((int)size,(int)size);
   }
   
   void update()
@@ -67,6 +78,7 @@ class Enemy extends GameObject
     }//end for
     
      soundTimePassed += timeDelta;//used to reset the sounds
+     animTimePassed += timeDelta;
          //rest Enemy getting hit sound
      if(soundTimePassed > soundDuration)
      {  
@@ -87,7 +99,17 @@ class Enemy extends GameObject
   void render()
   {
     fill(0);
-    ellipse(pos.x,pos.y, size, size);
+    //ellipse(pos.x,pos.y, size, size);
+    if(animTimePassed < animDuration)
+    {
+      image(enemyAnimation[0], pos.x,pos.y);
+      
+    }
+    else
+    {
+      image(enemyAnimation[1], pos.x,pos.y);
+      
+    }
     
     
     //This does not work here???
