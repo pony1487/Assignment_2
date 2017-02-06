@@ -88,6 +88,7 @@ Terrain t;
 
 //used to make sure  drawCP5Buttons() is called once so it doesnt keep creating textbox 60fps
 boolean  cp5Called;
+boolean terrainCalled;
 
 void setup()
 {
@@ -145,6 +146,7 @@ void setup()
 
   //reset flag
   cp5Called = false;
+  terrainCalled = false;
 
   //init audio stuff
   minim = new Minim(this);
@@ -164,6 +166,7 @@ void draw()
     background(0);
 
     drawMenu();
+     terrainCalled = false;
 
     //ensure the text/submit field is only draw once
     if (!cp5Called)
@@ -178,6 +181,11 @@ void draw()
     //remove name box
     cp5.remove("name");
     cp5.remove("submit");
+    
+    if(!terrainCalled)
+    {
+       generateTerrain(); 
+    }
 
 
     image(backgroundImage, 0, 0);
@@ -222,6 +230,7 @@ void draw()
 
     //reset the boolean so when you go back to the main menu you can enter a name again
     cp5Called = false;
+    terrainCalled = false;
     drawReadMe();
     break;
   case 3:
@@ -232,6 +241,7 @@ void draw()
     cp5.remove("name");
     cp5.remove("submit");
     cp5Called = false;
+     terrainCalled = false;
     drawScoreScreen();
 
 
@@ -245,6 +255,7 @@ void draw()
     //text("Leaderboard", width/2, height/2);
     //reset the boolean so when you go back to the main menu you can enter a name again
     cp5Called = false;
+     terrainCalled = false;
     break;
   }//end switch
 }//end draw
@@ -292,6 +303,7 @@ void generateTerrain()
 
    t = new Terrain();
    gameObjects.add(t);
+   terrainCalled = true;
 }
 
 //spwan stuff
