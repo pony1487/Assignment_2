@@ -388,7 +388,8 @@ void printLeaderBoard()
     b5.render();
     b5.drawText();
     b5.isClicked();
-    int leaderBoardSize = 3;
+    int leaderBoardSize = 3;//how many scores we will display
+    int leaderBoardArraListSize = 0;//will be used to set the size of the temp array that will be sorted. The entire array, not just the first 3 elements
     
     textSize(32);
     
@@ -396,14 +397,8 @@ void printLeaderBoard()
     
     float leaderBoardSpaceing = 100;
     String line;
-    String[] temp = new String[leaderBoardSize];
-    
-    //intialise temp
-    for(int i = 0; i < leaderBoardSize;i++)
-    {
-       temp[i] = " "; 
-    }
-  
+
+  //read scores from file
   try 
   {
     line = reader.readLine();
@@ -425,38 +420,50 @@ void printLeaderBoard()
    leaderBoardScores.add(line);
   }
   
+  //use this to set size of temp string array
+  leaderBoardArraListSize =  leaderBoardScores.size();
+    
+  //println("leaderBoardArraListSize = " + leaderBoardArraListSize);
+  
+  //array that will be used to sort scores
+  String[] temp = new String[100];
+    
+  //intialise temp
+  
+   for(int i = 0; i < leaderBoardArraListSize;i++)
+   {
+      temp[i] = "EMPTY"; 
+   }
+   //testing
+   for(int i = 0; i < leaderBoardArraListSize;i++)
+   {
+      //println(i + ") " + temp[i]);
+   }
+   
+   
+  
   textSize(26);
   //this is the only way I could this to work. It copies the 3 scores into a temp array. If I dont do this the program crashes while trying
   //to print the arrayList if the file is empty
   for(int i = 0; i < leaderBoardScores.size();i++)
   {
-     if(i >= leaderBoardSize)
-     {
-         break;
-     } 
-     else if(leaderBoardScores.get(i).equals(null) && leaderBoardScores.get(i).isEmpty())
-     {
-        //leaderBoardScores.set(i, "No Score");
-        temp[i] = "DEFAULT";
-     }
-     else
-     {
-        temp[i] = leaderBoardScores.get(i); //error here
-     }
+  
+        temp[i] = leaderBoardScores.get(i); 
+     
   }
   
   //sort temp array by last number
   char tempChar1;
   char tempChar2;
   
-  for (int i = 0; i < leaderBoardSize; i++)
+  for (int i = 0; i < leaderBoardArraListSize; i++)
   {
-    for (int j = 0; j < (leaderBoardSize - 1); j++)
+    for (int j = 0; j < (leaderBoardArraListSize - 1); j++)
     {
         tempChar1 = temp[j].charAt(temp[j].length() - 1);
         tempChar2  = temp[j+1].charAt(temp[j+1].length() - 1);
         
-        println(temp[j]);
+        //println(temp[j]);
         
         
         if (tempChar1 < tempChar2)
@@ -469,12 +476,16 @@ void printLeaderBoard()
     }
     
   }
-      
       //display scores
       fill(255);
+      
+    
+      
       text("1) " + temp[0] , width/2, height/2);
       text("2) " + temp[1], width/2, height/2 + leaderBoardSpaceing);
       text("3) " + temp[2], width/2,  height/2 + (leaderBoardSpaceing * 2));
+      
+      
       
 }//end printLeaderBoard()
 
