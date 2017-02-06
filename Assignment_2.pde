@@ -69,6 +69,9 @@ int mode;
 //background and floor images
 PImage backgroundImage;
 PImage groundImage;
+PImage enemyImage;
+PImage berzerkImage;
+PImage slowDownImage;
 
 //Other varaibles
 int playerScore;// trying to figure how to ecapsulate this in the player class. Cant get enemy object to let player object know it is hit
@@ -155,6 +158,15 @@ void setup()
   playerDies = minim.loadFile("playerDies.mp3");
   jetPack = minim.loadFile("jetPack.mp3");
   enemyExplosion = minim.loadFile("enemyExplosion.mp3");
+  
+  //load images for readme
+  enemyImage = loadImage("enemy1.png");
+  berzerkImage = loadImage("heart.png");
+  slowDownImage = loadImage("beer.png");
+  
+  enemyImage.resize(200,200);
+  berzerkImage.resize(200,200);
+  slowDownImage.resize(200,200);
 }//end setup
 
 void draw()
@@ -227,8 +239,7 @@ void draw()
     background(0);
     cp5.remove("name");
     cp5.remove("submit");
-    text("ReadME", width/2, height/2);//to do
-
+   
     //reset the boolean so when you go back to the main menu you can enter a name again
     cp5Called = false;
     terrainCalled = false;
@@ -491,6 +502,21 @@ void printLeaderBoard()
 
 void drawReadMe()
 {
+  float x = 100;
+  float y = 100;
+  
+  float spaceing = 200;
+  float textPadding = spaceing / 2;
+  image(enemyImage, x, y);
+  image(berzerkImage, x + spaceing,y);
+  image(slowDownImage, x + (spaceing * 2),y);
+  
+  text("Enemy", x + textPadding, y);
+  text("Health", x + spaceing + textPadding, y);
+  text("SlowDown",  x + (spaceing * 2) + textPadding, y);
+  
+  text("Use the arrow keys to move your character!!", width/2, 400);
+  text("Shoot enemies while avoiding the pipes!!", width/2, 450);
   b5.render();
   b5.drawText();
   b5.isClicked();
