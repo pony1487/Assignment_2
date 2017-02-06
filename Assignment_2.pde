@@ -20,6 +20,7 @@ AudioPlayer playerHit;
 AudioPlayer playerDies;
 AudioPlayer jetPack;
 AudioPlayer enemyExplosion;
+AudioPlayer music;
 
 //used to store players score and name
 import java.io.FileWriter;
@@ -158,6 +159,7 @@ void setup()
   playerDies = minim.loadFile("playerDies.mp3");
   jetPack = minim.loadFile("jetPack.mp3");
   enemyExplosion = minim.loadFile("enemyExplosion.mp3");
+  music = minim.loadFile("MainSong.mp3");
   
   //load images for readme
   enemyImage = loadImage("enemy1.png");
@@ -167,6 +169,9 @@ void setup()
   enemyImage.resize(200,200);
   berzerkImage.resize(200,200);
   slowDownImage.resize(200,200);
+   
+  music.play();
+ 
 }//end setup
 
 void draw()
@@ -346,6 +351,7 @@ void drawScoreScreen()
   scoreScreen.render();
 
   playerDies.play();
+  music.rewind();
 
   b5.render();
   b5.drawText();
