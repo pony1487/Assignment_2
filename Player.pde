@@ -357,7 +357,7 @@ class Player extends GameObject
     
     image(sprites[animMode],pos.x - 50, pos.y - 70);
     
-    
+    fill(255);
     text("Score: " + playerScore, 30,20);
     text("Name: " + name, 30,50);
     pushMatrix(); // Stores the current transform

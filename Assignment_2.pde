@@ -5,6 +5,7 @@
   
   BUGS:
   -Game goes straight to game overs screen if player plays a game and dies, it wont let player re-enter their name and play again
+  -leaderboard null pointer exception if more than 3 names 
  
 */
 //used for text input on screen
@@ -429,7 +430,7 @@ void printLeaderBoard()
      }
      else
      {
-        temp[i] = leaderBoardScores.get(i); 
+        temp[i] = leaderBoardScores.get(i); //error here
      }
   }
     
