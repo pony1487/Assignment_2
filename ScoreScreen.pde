@@ -59,6 +59,12 @@ class ScoreScreen //NOT game object
       
     }
     
+    void wPressed()
+    {
+       textSize(40);
+       text("Score Saved",width/2, 100);
+    }
+    
     
   
   

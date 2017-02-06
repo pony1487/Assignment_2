@@ -388,6 +388,7 @@ void printLeaderBoard()
     b5.render();
     b5.drawText();
     b5.isClicked();
+    int leaderBoardSize = 3;
     
     textSize(32);
     
@@ -395,7 +396,13 @@ void printLeaderBoard()
     
     float leaderBoardSpaceing = 100;
     String line;
-    String[] temp = new String[3];
+    String[] temp = new String[leaderBoardSize];
+    
+    //intialise temp
+    for(int i = 0; i < leaderBoardSize;i++)
+    {
+       temp[i] = " "; 
+    }
   
   try 
   {
@@ -423,17 +430,45 @@ void printLeaderBoard()
   //to print the arrayList if the file is empty
   for(int i = 0; i < leaderBoardScores.size();i++)
   {
-     if(leaderBoardScores.get(i) == null)
+     if(i >= leaderBoardSize)
+     {
+         break;
+     } 
+     else if(leaderBoardScores.get(i).equals(null) && leaderBoardScores.get(i).isEmpty())
      {
         //leaderBoardScores.set(i, "No Score");
-        temp[i] = "No Score";
+        temp[i] = "DEFAULT";
      }
      else
      {
         temp[i] = leaderBoardScores.get(i); //error here
      }
   }
+  
+  //sort temp array by last number
+  char tempChar1;
+  char tempChar2;
+  
+  for (int i = 0; i < leaderBoardSize; i++)
+  {
+    for (int j = 0; j < (leaderBoardSize - 1); j++)
+    {
+        tempChar1 = temp[j].charAt(temp[j].length() - 1);
+        tempChar2  = temp[j+1].charAt(temp[j+1].length() - 1);
+        
+        println(temp[j]);
+        
+        
+        if (tempChar1 < tempChar2)
+        {
+           String tempString = temp[j];
+           temp[j] = temp[j + 1];
+           temp[j+1] = tempString;
+      }
+      
+    }
     
+  }
       
       //display scores
       fill(255);
@@ -476,6 +511,7 @@ void keyPressed()
   if(key == 'w')
   {
       scoreScreen.writeToFile();//writes to default processing location, look into changing this!
+      scoreScreen.wPressed();
   }
  
 }
