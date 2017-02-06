@@ -26,7 +26,9 @@ class SlowDownPowerUp extends GameObject implements Powerup
     
      enemySpeed = 0.20; //default is 1
      terrainSpeed = 0.70; //default is 3
-   
+     //start slow audio
+     slowMusic.play();
+     music.pause();
     
     
      
@@ -37,6 +39,13 @@ class SlowDownPowerUp extends GameObject implements Powerup
     
     enemySpeed = 1;//default is 1
     terrainSpeed = 3; //default is 3
+    //stop slow audio
+    
+    
+    slowMusic.pause();
+    slowMusic.rewind();
+    //start normal audio??
+    music.play();
     
   }
   

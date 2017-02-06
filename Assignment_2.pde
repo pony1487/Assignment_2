@@ -3,10 +3,6 @@
  Object Oriented Programming
  Assignment 2
  
- BUGS:
- -Game goes straight to game overs screen if player plays a game and dies, it wont let player re-enter their name and play again
- -leaderboard null pointer exception if more than 3 names 
- 
  */
 //used for text input on screen
 import controlP5.*;
@@ -21,6 +17,7 @@ AudioPlayer playerDies;
 AudioPlayer jetPack;
 AudioPlayer enemyExplosion;
 AudioPlayer music;
+AudioPlayer slowMusic;
 
 //used to store players score and name
 import java.io.FileWriter;
@@ -160,6 +157,7 @@ void setup()
   jetPack = minim.loadFile("jetPack.mp3");
   enemyExplosion = minim.loadFile("enemyExplosion.mp3");
   music = minim.loadFile("MainSong.mp3");
+  slowMusic = minim.loadFile("GameMusicSlowed.mp3");
   
   //load images for readme
   enemyImage = loadImage("enemy1.png");
@@ -350,8 +348,11 @@ void drawScoreScreen()
   scoreScreen.update();
   scoreScreen.render();
 
+  //play sound and reset music
   playerDies.play();
   music.rewind();
+  //slowMusic.pause();
+  slowMusic.rewind();
 
   b5.render();
   b5.drawText();
