@@ -10,6 +10,7 @@ class Enemy extends GameObject
   PImage enemyAnimation[];
   float animDuration = 1.0;
   float animTimePassed;
+  int animMode;
   
   
   Enemy(float x, float y)
@@ -27,6 +28,8 @@ class Enemy extends GameObject
     
     enemyAnimation[0].resize((int)size,(int)size);
     enemyAnimation[1].resize((int)size,(int)size);
+    
+    animMode = 0;
   }
   
   void update()
@@ -78,7 +81,7 @@ class Enemy extends GameObject
     }//end for
     
      soundTimePassed += timeDelta;//used to reset the sounds
-     animTimePassed += timeDelta;
+     
          //rest Enemy getting hit sound
      if(soundTimePassed > soundDuration)
      {  
@@ -87,6 +90,21 @@ class Enemy extends GameObject
         
         soundTimePassed = 0; 
      } 
+     
+     animTimePassed += timeDelta;
+     if(animTimePassed < animDuration)
+     {
+        animMode = 0; 
+        
+     }
+     else
+     {
+        animMode = 1; 
+     }
+     if(animTimePassed > 3.0)
+     {
+        animTimePassed = 0; 
+     }
      
      //this works here but should be in render() i think
      if(isDead)
@@ -100,16 +118,16 @@ class Enemy extends GameObject
   {
     fill(0);
     //ellipse(pos.x,pos.y, size, size);
-    if(animTimePassed < animDuration)
+    if(animMode == 0)
     {
       image(enemyAnimation[0], pos.x,pos.y);
-      
     }
     else
     {
       image(enemyAnimation[1], pos.x,pos.y);
-      
     }
+      
+   
     
     
     //This does not work here???

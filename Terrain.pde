@@ -4,6 +4,7 @@ class Terrain extends GameObject
   //float speed;
   float w;
   float h;
+  PImage tImage;
   
   Terrain()
   {
@@ -11,6 +12,7 @@ class Terrain extends GameObject
     h = 50;
     this.x = width - 50;
     this.y = groundY - h;
+    tImage = loadImage("marioPipes.png");
     
   }
   
@@ -25,12 +27,19 @@ class Terrain extends GameObject
        y = random(height / 2, height);
        h = groundY - y;
     }
+    
+    //image cant be resized if zero.
+    if(w > 0 && h > 0)
+    {
+      tImage.resize((int)w,(int)h);
+    }
   }
   
   void render()
   {
       fill(0);
       rect(x,y,w,h);
+      image(tImage,x,y);
   }
   
 }

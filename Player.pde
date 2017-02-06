@@ -272,7 +272,7 @@ class Player extends GameObject
        {
           Enemy temp_enemy = (Enemy)eo;
           //(pos.y + size) >= temp_enemy.pos.y && pos.y + size <= temp_enemy.pos.y) 
-           if( ((pos.x + size/2) >= temp_enemy.pos.x && (pos.x - size/2) <= temp_enemy.pos.x) && ( (pos.y + size/2) >= temp_enemy.pos.y && (pos.y - size/2) <= temp_enemy.pos.y))
+           if( ((pos.x + size) >= temp_enemy.pos.x && (pos.x - size) <= temp_enemy.pos.x) && ( (pos.y + size) >= temp_enemy.pos.y && (pos.y - size) <= temp_enemy.pos.y))
            {
                health--;
                 animMode = 5;

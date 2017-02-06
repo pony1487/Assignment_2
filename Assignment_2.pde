@@ -166,7 +166,7 @@ void draw()
     background(0);
 
     drawMenu();
-     terrainCalled = false;
+    terrainCalled = false;
 
     //ensure the text/submit field is only draw once
     if (!cp5Called)
@@ -174,7 +174,7 @@ void draw()
       drawCP5Buttons();
     }
 
-
+    playerDies.pause();
     break;
   case 1:
     //background(0);
@@ -221,6 +221,7 @@ void draw()
 
     //reset the boolean so when you go back to the main menu you can enter a name again
     cp5Called = false;
+    playerDies.pause();
     break;
   case 2:
     background(0);
@@ -232,6 +233,7 @@ void draw()
     cp5Called = false;
     terrainCalled = false;
     drawReadMe();
+    playerDies.pause();
     break;
   case 3:
 
