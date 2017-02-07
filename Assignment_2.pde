@@ -500,11 +500,11 @@ void printLeaderBoard()
   //display scores
   fill(255);
 
-
-
+  
   text("1) " + temp[0], width/2, height/2);
   text("2) " + temp[1], width/2, height/2 + leaderBoardSpaceing);
   text("3) " + temp[2], width/2, height/2 + (leaderBoardSpaceing * 2));
+  
 }//end printLeaderBoard()
 
 void drawReadMe()

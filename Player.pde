@@ -359,10 +359,29 @@ class Player extends GameObject
     
     fill(255);
     text("Score: " + playerScore, 30,20);
-    text("Name: " + name, 30,50);
+    text("Name: " + name, 50,50);
     pushMatrix(); // Stores the current transform
     translate(pos.x, pos.y);
-    text("Health" + health,50,-0);
+    
+    if(health > 50)
+    {
+       fill(0,255,0);
+       text("Health" + health,50,-0); 
+    }
+    
+    if(health < 50 && health > 20)
+    {
+       fill(255, 131, 0);
+       text("Health" + health,50,-0); 
+      
+    }
+    
+    if(health < 20)
+    {
+        fill(255,0,0);
+       text("Health" + health,50,-0);  
+    }
+    
     //displayName();
    
     //rotate(theta);    
